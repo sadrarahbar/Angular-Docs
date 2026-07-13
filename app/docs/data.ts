@@ -9,6 +9,9 @@ import {
 } from '../routes';
 import { renderMarkdown } from './markdown';
 
+export const languages = ['en', 'fa'] as const;
+export type Language = (typeof languages)[number];
+
 export type DocEntry = NavigationItem & {
   href: string;
   section: string;
@@ -16,6 +19,15 @@ export type DocEntry = NavigationItem & {
 };
 
 const contentDirectory = path.join(process.cwd(), 'app', 'content');
+const defaultLanguage: Language = 'en';
+
+export const normalizeLanguage = (value?: string): Language =>
+  value === 'fa' || value === 'en' ? value : defaultLanguage;
+
+export const isRtlLanguage = (language: Language) => language === 'fa';
+
+const getLocalizedContentPath = (language: Language, contentPath: string) =>
+  path.join(contentDirectory, language, `${contentPath}.md`);
 
 export const navigationSections = [
   { label: 'Docs', items: DOCS_SUB_NAVIGATION_DATA },
@@ -65,8 +77,14 @@ export const getDocNeighbors = (doc: DocEntry) => {
   };
 };
 
-export const getMarkdownForDoc = (doc: DocEntry) => {
-  const filePath = path.join(contentDirectory, `${doc.contentPath}.md`);
+export const getMarkdownForDoc = (doc: DocEntry, language: Language = defaultLanguage) => {
+  if (!doc.contentPath) {
+    return undefined;
+  }
+
+  const preferredPath = getLocalizedContentPath(language, doc.contentPath);
+  const fallbackPath = getLocalizedContentPath(defaultLanguage, doc.contentPath);
+  const filePath = fs.existsSync(preferredPath) ? preferredPath : fallbackPath;
 
   if (!filePath.startsWith(contentDirectory) || !fs.existsSync(filePath)) {
     return undefined;
@@ -75,12 +93,12 @@ export const getMarkdownForDoc = (doc: DocEntry) => {
   return fs.readFileSync(filePath, 'utf8');
 };
 
-export const getRenderedDoc = (doc: DocEntry) => {
-  const markdown = getMarkdownForDoc(doc);
+export const getRenderedDoc = (doc: DocEntry, language?: Language) => {
+  const markdown = getMarkdownForDoc(doc, language);
 
   if (!markdown) {
     return undefined;
   }
 
-  return renderMarkdown(markdown);
+  return renderMarkdown(markdown, language);
 };

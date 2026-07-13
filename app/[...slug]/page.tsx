@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { DocsShell } from '../docs/DocsShell';
-import { docsWithContent, getDocBySlug, getRenderedDoc } from '../docs/data';
+import { docsWithContent, getDocBySlug, getRenderedDoc, normalizeLanguage } from '../docs/data';
 
 type DocPageProps = {
   params: Promise<{
     slug: string[];
+  }>;
+  searchParams: Promise<{
+    lang?: string;
   }>;
 };
 
@@ -25,19 +28,21 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
   };
 }
 
-export default async function DocPage({ params }: DocPageProps) {
+export default async function DocPage({ params, searchParams }: DocPageProps) {
   const { slug } = await params;
+  const { lang } = await searchParams;
+  const language = normalizeLanguage(lang);
   const doc = getDocBySlug(slug);
 
   if (!doc) {
     notFound();
   }
 
-  const rendered = getRenderedDoc(doc);
+  const rendered = getRenderedDoc(doc, language);
 
   if (!rendered) {
     notFound();
   }
 
-  return <DocsShell doc={doc} rendered={rendered} />;
+  return <DocsShell doc={doc} rendered={rendered} language={language} />;
 }

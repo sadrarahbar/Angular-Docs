@@ -3,10 +3,12 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { NavigationItem } from '../routes';
+import type { Language } from './data';
 
 type SidebarNavigationProps = {
   items: NavigationItem[];
   activeHref: string;
+  language: Language;
   onNavigate?: () => void;
 };
 
@@ -25,6 +27,14 @@ const normalizePath = (value?: string) => {
   }
 
   return value.startsWith('/') ? value : `/${value}`;
+};
+
+const getLocalizedHref = (href: string, language: Language) => {
+  if (isExternal(href) || language === 'en') {
+    return href;
+  }
+
+  return `${href}?lang=${language}`;
 };
 
 const statusLabel = (status?: string) => {
@@ -104,7 +114,7 @@ const getActiveExpandedIds = (items: SidebarNode[], activeHref: string) => {
   return new Set(activeNode ? getAncestorIds(items, activeNode.id) : []);
 };
 
-export function SidebarNavigation({ items, activeHref, onNavigate }: SidebarNavigationProps) {
+export function SidebarNavigation({ items, activeHref, language, onNavigate }: SidebarNavigationProps) {
   const tree = useMemo(() => buildTree(items), [items]);
   const [expandedIds, setExpandedIds] = useState(() => {
     const activeIds = getActiveExpandedIds(tree, activeHref);
@@ -160,6 +170,7 @@ export function SidebarNavigation({ items, activeHref, onNavigate }: SidebarNavi
       const hasChildren = Boolean(node.children?.length);
       const isExpanded = expandedIds.has(node.id);
       const isActive = node.href === activeHref;
+      const linkHref = node.href ? getLocalizedHref(node.href, language) : undefined;
       const depthClass = `depth-${Math.min(node.depth, 3)}`;
       const content = (
         <>
@@ -187,12 +198,12 @@ export function SidebarNavigation({ items, activeHref, onNavigate }: SidebarNavi
               <span className="sidebar-toggle-placeholder" aria-hidden="true" />
             )}
 
-            {node.href ? (
+            {linkHref ? (
               <Link
-                href={node.href}
+                href={linkHref}
                 className={['sidebar-link', isActive ? 'active' : ''].join(' ')}
-                target={isExternal(node.href) ? '_blank' : undefined}
-                rel={isExternal(node.href) ? 'noreferrer' : undefined}
+                target={isExternal(linkHref) ? '_blank' : undefined}
+                rel={isExternal(linkHref) ? 'noreferrer' : undefined}
                 onClick={(event) => selectNode(node, event.currentTarget)}
               >
                 {content}

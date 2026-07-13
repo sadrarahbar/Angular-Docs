@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { allDocs, getDocNeighbors, navigationSections, type DocEntry } from './data';
+import { allDocs, getDocNeighbors, isRtlLanguage, navigationSections, type DocEntry, type Language } from './data';
 import type { NavigationItem } from '../routes';
 import type { RenderedMarkdown } from './markdown';
 import { CodeInteractions } from './CodeInteractions';
 import { DocsSidebar } from './DocsSidebar';
+import { LanguageSelect } from './LanguageSelect';
 import { ThemeToggle } from './ThemeToggle';
 
 type DocsShellProps = {
   doc: DocEntry;
   rendered: RenderedMarkdown;
+  language: Language;
 };
 
 type BreadcrumbItem = {
@@ -24,6 +26,14 @@ const normalizePath = (value?: string) => {
   }
 
   return value.startsWith('/') ? value : `/${value}`;
+};
+
+const getLocalizedHref = (href: string, language: Language) => {
+  if (isExternal(href) || language === 'en') {
+    return href;
+  }
+
+  return `${href}?lang=${language}`;
 };
 
 const getBreadcrumbItems = (
@@ -51,15 +61,16 @@ const getBreadcrumbItems = (
   return [];
 };
 
-export function DocsShell({ doc, rendered }: DocsShellProps) {
+export function DocsShell({ doc, rendered, language }: DocsShellProps) {
   const neighbors = getDocNeighbors(doc);
   const sectionItems = navigationSections.find((section) => section.label === doc.section)?.items ?? [];
   const breadcrumbItems = getBreadcrumbItems(sectionItems, doc.href);
+  const isRtl = isRtlLanguage(language);
 
   return (
-    <div className="docs-app">
+    <div className={['docs-app', isRtl ? 'rtl' : ''].join(' ')} dir={isRtl ? 'rtl' : 'ltr'} lang={language}>
       <header className="topbar">
-        <Link className="brand" href="/overview" aria-label="Angular documentation home">
+        <Link className="brand" href={getLocalizedHref('/overview', language)} aria-label="Angular documentation home">
           <span className="brand-mark">A</span>
           <span>Angular Docs</span>
         </Link>
@@ -68,19 +79,23 @@ export function DocsShell({ doc, rendered }: DocsShellProps) {
             {navigationSections.slice(0, 3).map((section) => (
               <Link
                 key={section.label}
-                href={allDocs.find((item) => item.section === section.label && item.contentPath)?.href ?? '/overview'}
+                href={getLocalizedHref(
+                  allDocs.find((item) => item.section === section.label && item.contentPath)?.href ?? '/overview',
+                  language,
+                )}
                 className={section.label === doc.section ? 'topbar-link active' : 'topbar-link'}
               >
                 {section.label}
               </Link>
             ))}
           </nav>
+          <LanguageSelect language={language} />
           <ThemeToggle />
         </div>
       </header>
 
       <div className="docs-layout">
-        <DocsSidebar section={doc.section} items={sectionItems} activeHref={doc.href} />
+        <DocsSidebar section={doc.section} items={sectionItems} activeHref={doc.href} language={language} />
 
         <main className="content-shell">
           <CodeInteractions />
@@ -88,7 +103,11 @@ export function DocsShell({ doc, rendered }: DocsShellProps) {
             <nav className="doc-breadcrumb" aria-label="Breadcrumb">
               {breadcrumbItems.map((item, index) => (
                 <span key={`${item.label}-${index}`} className="doc-breadcrumb-item">
-                  {item.href ? <Link href={item.href}>{item.label}</Link> : <span>{item.label}</span>}
+                  {item.href ? (
+                    <Link href={getLocalizedHref(item.href, language)}>{item.label}</Link>
+                  ) : (
+                    <span>{item.label}</span>
+                  )}
                   {index < breadcrumbItems.length - 1 ? (
                     <svg viewBox="0 0 20 20" aria-hidden="true">
                       <path d="m7.5 4.5 5.5 5.5-5.5 5.5" />
@@ -102,7 +121,7 @@ export function DocsShell({ doc, rendered }: DocsShellProps) {
 
           <footer className="doc-pagination" aria-label="Document pagination">
             {neighbors.previous ? (
-              <Link href={neighbors.previous.href} className="page-link previous">
+              <Link href={getLocalizedHref(neighbors.previous.href, language)} className="page-link previous">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="m15 18-6-6 6-6" />
                 </svg>
@@ -115,7 +134,7 @@ export function DocsShell({ doc, rendered }: DocsShellProps) {
               <span />
             )}
             {neighbors.next ? (
-              <Link href={neighbors.next.href} className="page-link next">
+              <Link href={getLocalizedHref(neighbors.next.href, language)} className="page-link next">
                 <span>
                   <small>Next</small>
                   <strong>{neighbors.next.label}</strong>

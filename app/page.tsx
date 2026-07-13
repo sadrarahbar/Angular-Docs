@@ -1,7 +1,16 @@
 import { redirect } from 'next/navigation';
-import { getFirstDoc } from './docs/data';
+import { getFirstDoc, normalizeLanguage } from './docs/data';
 
-export default function Home() {
+type HomeProps = {
+  searchParams: Promise<{
+    lang?: string;
+  }>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const { lang } = await searchParams;
+  const language = normalizeLanguage(lang);
   const firstDoc = getFirstDoc();
-  redirect(firstDoc?.href ?? '/overview');
+  const href = firstDoc?.href ?? '/overview';
+  redirect(language === 'fa' ? `${href}?lang=fa` : href);
 }

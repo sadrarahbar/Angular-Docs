@@ -12,6 +12,8 @@ export type RenderedMarkdown = {
   headings: Heading[];
 };
 
+type ContentLanguage = 'en' | 'fa';
+
 const escapeHtml = (value: string) =>
   value
     .replaceAll('&', '&amp;')
@@ -35,6 +37,7 @@ const getAttr = (source: string, attr: string) => {
 };
 
 const contentDirectory = path.join(process.cwd(), 'app', 'content');
+const defaultContentLanguage: ContentLanguage = 'en';
 
 const normalizeCodeBody = (value: string) => {
   const lines = value.replace(/\r\n/g, '\n').split('\n');
@@ -97,7 +100,10 @@ const inferLanguage = (attrs: string) => {
   }
 };
 
-const getCodeFromPath = (sourcePath: string) => {
+const getContentFilePath = (language: ContentLanguage, relativePath: string) =>
+  path.join(contentDirectory, language, relativePath);
+
+const getCodeFromPath = (sourcePath: string, language: ContentLanguage) => {
   if (!sourcePath) {
     return '';
   }
@@ -106,7 +112,9 @@ const getCodeFromPath = (sourcePath: string) => {
     .replace(/^adev\/src\/content\//, '')
     .replace(/^src\/content\//, '')
     .replaceAll('/', path.sep);
-  const filePath = path.join(contentDirectory, relativePath);
+  const preferredPath = getContentFilePath(language, relativePath);
+  const fallbackPath = getContentFilePath(defaultContentLanguage, relativePath);
+  const filePath = fs.existsSync(preferredPath) ? preferredPath : fallbackPath;
 
   if (!filePath.startsWith(contentDirectory) || !fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
     return '';
@@ -211,20 +219,20 @@ const renderCodeBlock = (code: string, language = '', header = '') => {
   )}</code></pre></figure>`;
 };
 
-const renderDocsCode = (attrs: string, body: string) => {
-  const code = normalizeCodeBody(body) || getCodeFromPath(getAttr(attrs, 'path'));
+const renderDocsCode = (attrs: string, body: string, language: ContentLanguage) => {
+  const code = normalizeCodeBody(body) || getCodeFromPath(getAttr(attrs, 'path'), language);
   const header = getAttr(attrs, 'header');
 
   return renderCodeBlock(code, inferLanguage(attrs), header);
 };
 
-const renderDocsCodeTabs = (body: string) => {
+const renderDocsCodeTabs = (body: string, language: ContentLanguage) => {
   const examples = [
     ...body.matchAll(/<docs-code([^>]*?)>([\s\S]*?)<\/docs-code>|<docs-code([^>]*?)\/>/g),
   ].map((match) => {
     const attrs = match[1] ?? match[3] ?? '';
     const header = getAttr(attrs, 'header') || getAttr(attrs, 'language') || 'Code';
-    const code = normalizeCodeBody(match[2] ?? '') || getCodeFromPath(getAttr(attrs, 'path'));
+    const code = normalizeCodeBody(match[2] ?? '') || getCodeFromPath(getAttr(attrs, 'path'), language);
 
     return {
       code,
@@ -268,18 +276,18 @@ const renderInline = (value: string) => {
   return output;
 };
 
-const renderCustomBlocks = (source: string) => {
+const renderCustomBlocks = (source: string, language: ContentLanguage) => {
   let output = source;
 
   output = output.replace(
     /<docs-code-multifile[^>]*>([\s\S]*?)<\/docs-code-multifile>/g,
-    (_match, body: string) => renderDocsCodeTabs(body),
+    (_match, body: string) => renderDocsCodeTabs(body, language),
   );
 
   output = output.replace(
     /<docs-code([^>]*?)>([\s\S]*?)<\/docs-code>|<docs-code([^>]*?)\/>/g,
     (_match, attrs: string, body: string, selfClosingAttrs: string) =>
-      renderDocsCode(attrs ?? selfClosingAttrs ?? '', body ?? ''),
+      renderDocsCode(attrs ?? selfClosingAttrs ?? '', body ?? '', language),
   );
 
   output = output.replace(
@@ -334,8 +342,8 @@ const renderCustomBlocks = (source: string) => {
   return output;
 };
 
-export function renderMarkdown(markdown: string): RenderedMarkdown {
-  const lines = renderCustomBlocks(markdown).replace(/\r\n/g, '\n').split('\n');
+export function renderMarkdown(markdown: string, language: ContentLanguage = defaultContentLanguage): RenderedMarkdown {
+  const lines = renderCustomBlocks(markdown, language).replace(/\r\n/g, '\n').split('\n');
   const headings: Heading[] = [];
   const html: string[] = [];
   let paragraph: string[] = [];

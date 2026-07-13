@@ -2,15 +2,17 @@
 
 import { useState } from 'react';
 import type { NavigationItem } from '../routes';
+import type { Language } from './data';
 import { SidebarNavigation } from './SidebarNavigation';
 
 type DocsSidebarProps = {
   section: string;
   items: NavigationItem[];
   activeHref: string;
+  language: Language;
 };
 
-export function DocsSidebar({ section, items, activeHref }: DocsSidebarProps) {
+export function DocsSidebar({ section, items, activeHref, language }: DocsSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -52,6 +54,7 @@ export function DocsSidebar({ section, items, activeHref }: DocsSidebarProps) {
           key={section}
           items={items}
           activeHref={activeHref}
+          language={language}
           onNavigate={() => setIsOpen(false)}
         />
       </aside>
