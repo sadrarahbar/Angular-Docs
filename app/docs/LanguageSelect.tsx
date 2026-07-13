@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import type { Language } from './data';
+import { translateUi } from './i18n';
 
 type LanguageSelectProps = {
   language: Language;
@@ -27,10 +28,10 @@ export function LanguageSelect({ language }: LanguageSelectProps) {
 
   return (
     <label className="language-select">
-      <span>Language</span>
+      <span>{translateUi('language', language)}</span>
       <select
         value={language}
-        aria-label="Language"
+        aria-label={translateUi('language', language)}
         onChange={(event) => changeLanguage(event.target.value as Language)}
       >
         <option value="en">English</option>

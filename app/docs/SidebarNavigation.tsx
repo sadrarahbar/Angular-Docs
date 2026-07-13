@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { NavigationItem } from '../routes';
 import type { Language } from './data';
+import { translateUi } from './i18n';
 
 type SidebarNavigationProps = {
   items: NavigationItem[];
@@ -187,7 +188,9 @@ export function SidebarNavigation({ items, activeHref, language, onNavigate }: S
                 type="button"
                 className="sidebar-toggle"
                 aria-expanded={isExpanded}
-                aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${node.label}`}
+                aria-label={`${isExpanded ? translateUi('collapse', language) : translateUi('expand', language)} ${
+                  node.label
+                }`}
                 onClick={(event) => toggle(node, event.currentTarget)}
               >
                 <svg viewBox="0 0 20 20" aria-hidden="true">

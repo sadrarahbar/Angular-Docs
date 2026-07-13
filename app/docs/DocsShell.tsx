@@ -6,6 +6,7 @@ import { CodeInteractions } from './CodeInteractions';
 import { DocsSidebar } from './DocsSidebar';
 import { LanguageSelect } from './LanguageSelect';
 import { ThemeToggle } from './ThemeToggle';
+import { localizeDocEntry, localizeNavigationItems, translateLabel, translateUi } from './i18n';
 
 type DocsShellProps = {
   doc: DocEntry;
@@ -64,7 +65,10 @@ const getBreadcrumbItems = (
 export function DocsShell({ doc, rendered, language }: DocsShellProps) {
   const neighbors = getDocNeighbors(doc);
   const sectionItems = navigationSections.find((section) => section.label === doc.section)?.items ?? [];
-  const breadcrumbItems = getBreadcrumbItems(sectionItems, doc.href);
+  const localizedSectionItems = localizeNavigationItems(sectionItems, language);
+  const breadcrumbItems = getBreadcrumbItems(localizedSectionItems, doc.href);
+  const previousDoc = localizeDocEntry(neighbors.previous, language);
+  const nextDoc = localizeDocEntry(neighbors.next, language);
   const isRtl = isRtlLanguage(language);
 
   return (
@@ -85,7 +89,7 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
                 )}
                 className={section.label === doc.section ? 'topbar-link active' : 'topbar-link'}
               >
-                {section.label}
+                {translateLabel(section.label, language)}
               </Link>
             ))}
           </nav>
@@ -95,7 +99,12 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
       </header>
 
       <div className="docs-layout">
-        <DocsSidebar section={doc.section} items={sectionItems} activeHref={doc.href} language={language} />
+        <DocsSidebar
+          section={translateLabel(doc.section, language)}
+          items={localizedSectionItems}
+          activeHref={doc.href}
+          language={language}
+        />
 
         <main className="content-shell">
           <CodeInteractions />
@@ -120,24 +129,24 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
           <article className="doc-content" dangerouslySetInnerHTML={{ __html: rendered.html }} />
 
           <footer className="doc-pagination" aria-label="Document pagination">
-            {neighbors.previous ? (
-              <Link href={getLocalizedHref(neighbors.previous.href, language)} className="page-link previous">
+            {previousDoc ? (
+              <Link href={getLocalizedHref(previousDoc.href, language)} className="page-link previous">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="m15 18-6-6 6-6" />
                 </svg>
                 <span>
-                  <small>Previous</small>
-                  <strong>{neighbors.previous.label}</strong>
+                  <small>{translateUi('previous', language)}</small>
+                  <strong>{previousDoc.label}</strong>
                 </span>
               </Link>
             ) : (
               <span />
             )}
-            {neighbors.next ? (
-              <Link href={getLocalizedHref(neighbors.next.href, language)} className="page-link next">
+            {nextDoc ? (
+              <Link href={getLocalizedHref(nextDoc.href, language)} className="page-link next">
                 <span>
-                  <small>Next</small>
-                  <strong>{neighbors.next.label}</strong>
+                  <small>{translateUi('next', language)}</small>
+                  <strong>{nextDoc.label}</strong>
                 </span>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="m9 6 6 6-6 6" />
@@ -147,8 +156,8 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
           </footer>
         </main>
 
-        <aside className="toc" aria-label="On this page">
-          <div className="toc-title">On this page</div>
+        <aside className="toc" aria-label={translateUi('onThisPage', language)}>
+          <div className="toc-title">{translateUi('onThisPage', language)}</div>
           {rendered.headings.length ? (
             <nav>
               {rendered.headings.slice(0, 12).map((heading) => (
@@ -158,7 +167,7 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
               ))}
             </nav>
           ) : (
-            <p>No headings</p>
+            <p>{translateUi('noHeadings', language)}</p>
           )}
         </aside>
       </div>

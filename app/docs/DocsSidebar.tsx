@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { NavigationItem } from '../routes';
 import type { Language } from './data';
+import { translateUi } from './i18n';
 import { SidebarNavigation } from './SidebarNavigation';
 
 type DocsSidebarProps = {
@@ -27,13 +28,13 @@ export function DocsSidebar({ section, items, activeHref, language }: DocsSideba
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
-        <span>Menu</span>
+        <span>{translateUi('menu', language)}</span>
       </button>
 
       <button
         type="button"
         className={['sidebar-backdrop', isOpen ? 'open' : ''].join(' ')}
-        aria-label="Close navigation"
+        aria-label={translateUi('closeNavigation', language)}
         onClick={() => setIsOpen(false)}
       />
 
@@ -44,7 +45,12 @@ export function DocsSidebar({ section, items, activeHref, language }: DocsSideba
       >
         <div className="sidebar-header">
           <div className="sidebar-title">{section}</div>
-          <button type="button" className="sidebar-close" aria-label="Close navigation" onClick={() => setIsOpen(false)}>
+          <button
+            type="button"
+            className="sidebar-close"
+            aria-label={translateUi('closeNavigation', language)}
+            onClick={() => setIsOpen(false)}
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="m6 6 12 12M18 6 6 18" />
             </svg>
