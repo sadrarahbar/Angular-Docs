@@ -1,0 +1,905 @@
+{
+  "version": 1,
+  "files": {
+    "ecosystem\\rxjs-interop\\output-interop.md": {
+      "sourceHash": "b570c5b6b4e87be053a1381e03b640c8852d98b2e2ed29a007371272c8e6e4e8",
+      "targetHash": "0904259a4a7932998ddd9fa9a632b35e6a52b17bc51366d2b88c99482c0f8aad",
+      "translatedAt": "2026-07-19T08:42:36.765Z",
+      "model": "codex-manual"
+    },
+    "ecosystem\\rxjs-interop\\take-until-destroyed.md": {
+      "sourceHash": "89d49b8af808ab0d342eeba1cfc2de1f3a71925426cc2a2f99ffc67d1327ba30",
+      "targetHash": "0ccac5ab5017b9850d821663e07185effdc9034abcea9583daf8f888913bce5c",
+      "translatedAt": "2026-07-19T08:42:36.765Z",
+      "model": "codex-manual"
+    },
+    "ecosystem\\web-workers.md": {
+      "sourceHash": "c0a6eb6905beb1a9a6dd44a18b9c011c4952d50711aa024713f507bea70fd610",
+      "targetHash": "304782d2d8c1cafed2256fae56150e67cb4e8894babf8b4e52e0b59aba3d9c5d",
+      "translatedAt": "2026-07-19T08:42:36.765Z",
+      "model": "codex-manual"
+    },
+    "error.md": {
+      "sourceHash": "702be2cee258440b5e30a5a710c19aeec1479c043e1d0894d008f0bd738e9778",
+      "targetHash": "29894a46b42eadcd193a1cf50bfe6ca2c2ebf1de12341d13f85c55d1b334571c",
+      "translatedAt": "2026-07-19T08:39:50.301Z",
+      "model": "codex-manual"
+    },
+    "examples\\i18n\\readme.md": {
+      "sourceHash": "35736a9a6b5e221e71bd729cc64c7ab4835f2162731904269c83158d5acadce8",
+      "targetHash": "da1f545bc91759d50b084d4fcce51cb7e3fa145e6401e359046b361a824c4ae8",
+      "translatedAt": "2026-07-19T09:05:05.528Z",
+      "model": "codex-manual"
+    },
+    "examples\\service-worker-getting-started\\src\\app\\readme.md": {
+      "sourceHash": "fcc854b1aaae165b8a740e578dacccd44a5fe1091ad217538b2c0444a7ec4aaf",
+      "targetHash": "bb17862d9c608037af9b2d74fdd8338e2e138d5b5a09ba77f283db0bd69e1b48",
+      "translatedAt": "2026-07-19T09:05:05.526Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\advanced-configuration.md": {
+      "sourceHash": "bee7ad07ce5034bf38d6a81880bf0fa58a6a53e483beacd051aca872192be928",
+      "targetHash": "7046227299596a2558c3ad7438eb68a910f8ec52dc7299d644ac7f47c4659d11",
+      "translatedAt": "2026-07-19T09:29:47.463Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\anatomy-of-components.md": {
+      "sourceHash": "d6ac3156aaa3d7f326c546ebe22978dc34b7acfa4ef086c5e58634957f1db709",
+      "targetHash": "e018f57b73bf05f7c509162b4b3b11d6fed8d55941e2279172a8abe16d5a1cbf",
+      "translatedAt": "2026-07-19T09:29:47.462Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\content-projection.md": {
+      "sourceHash": "667acc7581f8947d2e328df9dacaf12fd86a6528ab00ef356281f5e6b0257fc8",
+      "targetHash": "f848feab96a4524897b19850ac25886674a9d8008b66e4e806384fb76fe1319d",
+      "translatedAt": "2026-07-19T09:33:02.253Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\dom-apis.md": {
+      "sourceHash": "aa5621603704989557e32a258b6ab188fa85f41672ed9f178151424d81d00ed3",
+      "targetHash": "6bca5d1237d4fe3b6b802c9f334515647b1aac67bdfc67e7584d118082c57471",
+      "translatedAt": "2026-07-19T09:29:47.463Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\host-elements.md": {
+      "sourceHash": "54076973858dfbd548052a2c099992616a057584fe136d2ac2bd7d498f018270",
+      "targetHash": "a8f737daaf65986d21592946a5c11cd7b9b1a0d914c1fb6f065c6be6b59b185f",
+      "translatedAt": "2026-07-19T09:33:02.253Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\inheritance.md": {
+      "sourceHash": "db53858119d9b7811ebba8a0e2fbcb138fd1c56119f8ae3c00d88539c01c78af",
+      "targetHash": "6d2e5cbc0df2f841607eab3df931e8aa87b1f4e2d459de3be9a771c476c3f0e6",
+      "translatedAt": "2026-07-19T09:29:47.463Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\inputs.md": {
+      "sourceHash": "1ca2e19f432517cac68442c37cbbe521841661dd325058f979a04040f58362b2",
+      "targetHash": "aa87e6fb56b22cc6210f830ad379d01a07f03b96839a5388d3340e043dcd4d7f",
+      "translatedAt": "2026-07-19T09:37:22.099Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\lifecycle.md": {
+      "sourceHash": "57a2ad260f7df543f654cb9fd972a3388c172303f9cd591b50f3a55e32b50b82",
+      "targetHash": "b39acc1c84e837e2463ec1872b66e70b73d74c6aca4ba27e6215c366793c25af",
+      "translatedAt": "2026-07-19T09:37:22.100Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\outputs.md": {
+      "sourceHash": "19d3db70ca9cec71d21057f505c8ed82b0e350cda8c121552376989e1b96e0d9",
+      "targetHash": "86ebb5028d789b8e3d70769a79c17b4db888763dc23ee327903d6491896507e2",
+      "translatedAt": "2026-07-19T09:33:02.253Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\programmatic-rendering.md": {
+      "sourceHash": "c11dd75fcd32dd20a1c74dae1428e7dffa9a8175dc3317b0592424b86965bd3c",
+      "targetHash": "a23e71ea0f03270dfd67f4cd5780056f6c1f72b003a2701f490edbd63f48e8f3",
+      "translatedAt": "2026-07-19T09:39:38.830Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\queries.md": {
+      "sourceHash": "c01050251a17b61914315fc5b19bd6f7e23e7737374dc047f81d7d754e5b71ee",
+      "targetHash": "4b77c09939764b75724b3e1747ef689eee1f8d707f41992a8f4e2adafe908f21",
+      "translatedAt": "2026-07-19T09:37:22.101Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\selectors.md": {
+      "sourceHash": "0507876fae39f528dfeeb04d4087319aa63f7ba91c190dad84574550462d0733",
+      "targetHash": "261ebe7798b2bd206c1fca7293d91d50eedc051e8da30ff98b2ee4fd1ed64d50",
+      "translatedAt": "2026-07-19T09:29:47.463Z",
+      "model": "codex-manual"
+    },
+    "guide\\components\\styling.md": {
+      "sourceHash": "cbb8b231a0f0edfcdcfa18e6581dec22b5885e49bdc31ee43f9e70fe06fe6762",
+      "targetHash": "760db7301645b081695b37d4a6487b66a57c0a27e6dba500085de02d3f4d472e",
+      "translatedAt": "2026-07-19T09:33:02.251Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\creating-and-using-services.md": {
+      "sourceHash": "eb2ef972fcc213ecebe2962c7225e8bd4b744bac0ccce2e071cda179acaf5b45",
+      "targetHash": "e21883e2e78d3fe88d3a7e9f10cbd7dc23e12c3eb977c96a7c7ed5fd43d594ec",
+      "translatedAt": "2026-07-19T10:20:38.450Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\creating-injectable-service.md": {
+      "sourceHash": "673d393c3b143545e184f47e8474e0abb02acdc3604a87e3c73596b8a68f0ae5",
+      "targetHash": "6e26417b66f883d8a0bf5c7d894545570a318642ab194ab7bc2f97c24ff3c7b5",
+      "translatedAt": "2026-07-19T10:20:38.451Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\debugging-and-troubleshooting-di.md": {
+      "sourceHash": "94d48fff213d8c09e8a6830609e3877cebb4ce29387c1142411ae6632a715624",
+      "targetHash": "9f2c3dc0cd8c79b6ac35423bfa1aa00da2acce24986d637dd7652d219f927712",
+      "translatedAt": "2026-07-19T10:20:38.453Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\defining-dependency-providers.md": {
+      "sourceHash": "1df8a2820f2a122b7945510a6a067fd9a56fc5d8ab2d97d48dbe4e52f7fe1a57",
+      "targetHash": "a915443f04fb3e70234040f477640beffefe3b1a35a54bfc542a8173ca22afc6",
+      "translatedAt": "2026-07-19T10:20:38.454Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\dependency-injection-context.md": {
+      "sourceHash": "c29e4c26544412159a3b288515234307db62ede9f06a035bf2913022c2f03bda",
+      "targetHash": "61a976ad2be8616419acc510545774ad85e8b7ad3ef7080053c215a3a290944a",
+      "translatedAt": "2026-07-19T10:20:38.454Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\di-in-action.md": {
+      "sourceHash": "92d245aa476cd7b1c10f4d24c946fc9dda504a5af32bf2514d83fd73056b084b",
+      "targetHash": "4dcfb401f13e86a1cb53a8582cd823f2dc0d9264f1e2b0dbc3b50105dee42a5f",
+      "translatedAt": "2026-07-19T10:20:38.454Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\hierarchical-dependency-injection.md": {
+      "sourceHash": "3c656043eb54be4616af99c69862423038e436422ad12677d44fca34b4cef713",
+      "targetHash": "6302ea6a33642b1e32fb7ac272dbdaefe1108aa4df57b201be5548d8c53ac2b2",
+      "translatedAt": "2026-07-19T10:20:38.456Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\lazy-loading-services.md": {
+      "sourceHash": "2e262d9ea5da72e252b79eb0706c7db42c9f542e37ae13d38fc1cf2e93d145a1",
+      "targetHash": "1f627cd2ebccc17f3d0f38a164cf3d822d02b0bfbc0f56603754bcada00531f2",
+      "translatedAt": "2026-07-19T10:20:38.457Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\lightweight-injection-tokens.md": {
+      "sourceHash": "c6ba587fe09334e65dbdb3bfa89bed153bc8a117f6713d729a133d89d667ec6f",
+      "targetHash": "e307a18e2a0905574493c858b22a2404e3b09c1a7f9247d000cd8290183ca169",
+      "translatedAt": "2026-07-19T10:20:38.457Z",
+      "model": "codex-manual"
+    },
+    "guide\\di\\overview.md": {
+      "sourceHash": "2155d42e734f88f822429597821e93eb5da1ece00826b18d605d6eed05f9a22a",
+      "targetHash": "a873ad59760996b552a9252cc6c4e98e42db3d1d62218e54819b72881c1712ec",
+      "translatedAt": "2026-07-19T10:20:38.458Z",
+      "model": "codex-manual"
+    },
+    "guide\\directives\\attribute-directives.md": {
+      "sourceHash": "5ff4ea2e8a3f5c727ea2aaa8754ae22c547c106dbaf5d433ff8037884428d7d1",
+      "targetHash": "904ea131cfb479c957410b6e2787589b5f40d99d92e975e2199ed004422b0f3f",
+      "translatedAt": "2026-07-19T09:54:32.254Z",
+      "model": "codex-manual"
+    },
+    "guide\\directives\\directive-composition-api.md": {
+      "sourceHash": "e7417428a1900bf202a832863109c44842779ce5e3bedfc8f6c529b9a1a24584",
+      "targetHash": "a17a22fa88ad5e6a7f59cca04aadd2bb7a6d76fb82d8e707865cfc5520bef86b",
+      "translatedAt": "2026-07-19T09:54:32.254Z",
+      "model": "codex-manual"
+    },
+    "guide\\directives\\overview.md": {
+      "sourceHash": "b8e31e965a5ef7e6b8bf71906122e3e02cc870a5efa6a8b3b9e050fac08c5f73",
+      "targetHash": "534cb371c9b9d20d8a38313c1daabedee48979c5b996fff2db4c27c2a3699727",
+      "translatedAt": "2026-07-19T09:54:32.253Z",
+      "model": "codex-manual"
+    },
+    "guide\\directives\\structural-directives.md": {
+      "sourceHash": "0320b001da969871c78a24daa4322fd48a94e15bb302036ca62bffc95f5bcf34",
+      "targetHash": "5c76667a0c00e2d8aa192f216518962b9145eecc73c09a025fb3a24fb00764f8",
+      "translatedAt": "2026-07-19T09:58:59.415Z",
+      "model": "codex-manual"
+    },
+    "guide\\elements.md": {
+      "sourceHash": "46becac57922fc214459bf6a36f81470d6d7b52c49bb8f0eb10af9d394cd29b4",
+      "targetHash": "6551f4444687076ba4146aaa33e80a3fbd6f3455e185e1eb0e7d5a5a7fd498c4",
+      "translatedAt": "2026-07-19T09:39:38.831Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\dynamic-forms.md": {
+      "sourceHash": "6bb41a75a2387a4b6f26d7463587c11273a72c7995cc351e7fc373d6396b6e37",
+      "targetHash": "575fbe2e186cd1e97974ecf26c388c6e524229a7658f7750e1eb8ac2c84a9e04",
+      "translatedAt": "2026-07-19T11:51:40.955Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\form-validation.md": {
+      "sourceHash": "1d914f1c2757a98e12cc3e6da119c3bf9ebf093585981b232748cd9f78daeb21",
+      "targetHash": "cddac2d7bd6c46d006ba076a1ea849e2c72e528cccc18c15ceed785822771bab",
+      "translatedAt": "2026-07-19T11:56:52.971Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\overview.md": {
+      "sourceHash": "ae522d47bd80117ca161e87c9c74fe8097f939e17030868a0f2e2379afe39b71",
+      "targetHash": "513cfb1dc1f1bd640186868008422e7881b4bb4596b85ebffd5e4b6fd9a845dd",
+      "translatedAt": "2026-07-19T10:41:45.164Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\reactive-forms.md": {
+      "sourceHash": "897d9a7d0e0d1a7562a137599db46aee5ad48c3fbd2e4f5b19046dccb355fd84",
+      "targetHash": "7e07058b487808db85d2d200add74b99c97994d3a81be8f122f6b9e9aa23d122",
+      "translatedAt": "2026-07-19T12:01:33.334Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\async-operations.md": {
+      "sourceHash": "95a7ce489913b5221559d51c6d1807cf883c7a199b5f4e6f73ab686aadec0b44",
+      "targetHash": "971e099b6f0bffa2e8ab6dadcd3fc60aa66c2daeda2f4cd8ca487b354914f424",
+      "translatedAt": "2026-07-19T11:37:22.418Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\comparison.md": {
+      "sourceHash": "286dc5376cc93ffe5dd55eeebda871588d09cc2c118e9f7524427f43ea5ef48d",
+      "targetHash": "baa37891c1f03ceaf0d72e08d53656b70bfd189ce6119668c8b9e84dbeace446",
+      "translatedAt": "2026-07-19T10:44:41.128Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\cross-field-logic.md": {
+      "sourceHash": "d23b28a419024f54ce521a5ff5d54f6849545659a2eb3d88fc2081f3f8355cb1",
+      "targetHash": "b2a8d7411db0278d635966ff3b3c82400f988c51666d92abf8d6e8181f41f040",
+      "translatedAt": "2026-07-19T10:50:57.203Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\custom-controls.md": {
+      "sourceHash": "ba6fa77ad2f49103ee55c352b0fbbb037541805a3c204c67faf6d4ea3a31640f",
+      "targetHash": "18bd6ecf48278e320ecd38b667b117db6f7be96efb15a043a5c5c0677c8331df",
+      "translatedAt": "2026-07-19T11:42:06.326Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\designing-your-form-model.md": {
+      "sourceHash": "83a67944506f4a575557ab4898f6ca6038f7023ff8aa29496f818417916ee089",
+      "targetHash": "9c425e2beabccef390d5a975d50979ca0aaa9089fb2354c15e479cc12b137a52",
+      "translatedAt": "2026-07-19T10:48:09.895Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\dynamic-forms-with-json.md": {
+      "sourceHash": "b139ddb37d6285a295bc48817cc7f9d8da72158839d1c770625d5c9feaccbba3",
+      "targetHash": "fb7431ea19b111b2c20a037ae2e3d4842d3bd30661187f5af35e462570d03e6a",
+      "translatedAt": "2026-07-19T11:48:37.803Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\field-metadata.md": {
+      "sourceHash": "14a3e10d36f5cacd44bc0dcf11c55bc1b84a81d3b219810518215517eb6e968c",
+      "targetHash": "f8369751066ca7111238bfba7c0cca7ab1a88e248184fc6708f07cab2274fe24",
+      "translatedAt": "2026-07-19T11:48:37.802Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\field-state-management.md": {
+      "sourceHash": "e08c3e2ebaf25e1a73dcf1fedfe1988e773deef2e53da948c2050e51598139d6",
+      "targetHash": "1dcccfbba1da42875bd22744c33a26ff7b21866d0bf0931f9dd77e67808ac02b",
+      "translatedAt": "2026-07-19T11:34:31.639Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\form-logic.md": {
+      "sourceHash": "d021eb7e9ac10b3eed2acbf651f7a01fb302608be9decc67e1cedf2483ae758a",
+      "targetHash": "cf2a63d93c71bcc8b19e5b8c80d8e3002419167f376df306fcbec491702dae93",
+      "translatedAt": "2026-07-19T10:57:30.651Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\form-submission.md": {
+      "sourceHash": "59fd1d3bb6d2179b7f7cfe181cbc246c4ca8f3a0850b625db25be1d6c6c281b1",
+      "targetHash": "b03b4fc1c7fc95a04d2ecc605a3227e14a9cf504c70fd79a2dd53957877f6db6",
+      "translatedAt": "2026-07-19T10:50:57.205Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\migration.md": {
+      "sourceHash": "4774e7afa7018cb2d80836f30cb8592074eacd5f716ef48125e5c0f1219a0913",
+      "targetHash": "97f6890ba697aee43e61dc2ab8194232e3d5193f1d3447973cae27f656daa574",
+      "translatedAt": "2026-07-19T10:54:34.439Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\models.md": {
+      "sourceHash": "98f5f66570d52ff87cf45b4ff19b0f8b995fe2079cf507da778b3d00deb47827",
+      "targetHash": "96b0902494271861f9614a831c80bc5be8adb686e414d6c2bb91c618e73aead9",
+      "translatedAt": "2026-07-19T10:48:09.893Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\overview.md": {
+      "sourceHash": "6978797612ceb6c4908238ab021c2a14c493d238dd7e89792aef95abef85545a",
+      "targetHash": "fc581a012af78a478d4b884673fde47633ab3a76f89b0df0fc1e05dc51f6a243",
+      "translatedAt": "2026-07-19T10:44:41.127Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\schemas.md": {
+      "sourceHash": "65485bbf3a16b9c376ccd8792793974dad8d224435c8937c0d6a60ebc51776f6",
+      "targetHash": "40edebc6ac749e7c88200af4e7c36b8f4541aa12b6cdeb692294cd712346bdc4",
+      "translatedAt": "2026-07-19T10:54:34.437Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\testing.md": {
+      "sourceHash": "a7b52b07ab1e39eb534ca5a133820c719ee557b25842b31543a82a75c86cb14d",
+      "targetHash": "a79b24e71a8005168d28d469b1da49f246e8809ce189f0b5e90920124739d3be",
+      "translatedAt": "2026-07-19T10:54:34.438Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\signals\\validation.md": {
+      "sourceHash": "fe9b531b3f17135586da911419b6ce020104e6c767237252a80d64bf8aa6e4c1",
+      "targetHash": "2961fbc7af22bd0885d4fb3acb9ed9b83c5d242e889ed4067e76a1c29ce1b90a",
+      "translatedAt": "2026-07-19T11:31:25.444Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\template-driven-forms.md": {
+      "sourceHash": "69c0cf5a872caa93f128cf55f2d4b2e54a59c1b67712d62b2b062164b2818583",
+      "targetHash": "708e6062dc2e75b99ee810b02ed41d4d86d442498124d5148cd487a82d27f697",
+      "translatedAt": "2026-07-19T11:54:32.595Z",
+      "model": "codex-manual"
+    },
+    "guide\\forms\\typed-forms.md": {
+      "sourceHash": "91b1165531b29c91f7ff63b43ed39dc35bab6e4358c01a7b30b6a7189639fabf",
+      "targetHash": "b575d68106f58d545947626f0131ac67b3af77d17391b7b83d3dc0d2e1d0fe6d",
+      "translatedAt": "2026-07-19T11:51:40.953Z",
+      "model": "codex-manual"
+    },
+    "guide\\http\\http-resource.md": {
+      "sourceHash": "615f56938561c547bf10ce7dfe7991814c78022741e39f131baa7740ec3824d4",
+      "targetHash": "7d91df247bf5c55983531214756e29f793a31b2892a5b622252c22b958e4c25e",
+      "translatedAt": "2026-07-19T12:03:41.775Z",
+      "model": "codex-manual"
+    },
+    "guide\\http\\interceptors.md": {
+      "sourceHash": "4cd2028d16083fedc9f06acd4a1f8fb0bfb06a51d227927f164ced24e9b0faed",
+      "targetHash": "45b88f276128fc37c2cdf990791884a16ac7c71853cf35c706792bd6ce0177f3",
+      "translatedAt": "2026-07-19T12:06:22.211Z",
+      "model": "codex-manual"
+    },
+    "guide\\http\\making-requests.md": {
+      "sourceHash": "e0a1f2d9a4f1068aa12347237b9089b4e16cfca2bb6b7f2a80dbf611514d2a44",
+      "targetHash": "5b4a601b7c19b83f623f1da4df515d6c6a471ec6a170e897c33f6acde67403fd",
+      "translatedAt": "2026-07-19T12:10:27.101Z",
+      "model": "codex-manual"
+    },
+    "guide\\http\\overview.md": {
+      "sourceHash": "4e1be8f9a3e7f9a297bf645fffedf0538a4b92e97269fbbe24a55d09e98e7759",
+      "targetHash": "c7e882224e39e8c3cbddc0bee25bf6cc83b2ab47db55b58fddf872d1e48d12c4",
+      "translatedAt": "2026-07-19T09:06:44.445Z",
+      "model": "codex-manual"
+    },
+    "guide\\http\\setup.md": {
+      "sourceHash": "60d2a7c8451d6f5cf221d79b5e898fb0cfbf25405bd420b73bb07ec746a19066",
+      "targetHash": "179c40b11cafdb3ddb714d450e40d20fe0ddc98ad6082e2bae889af85d9746c2",
+      "translatedAt": "2026-07-19T12:03:41.773Z",
+      "model": "codex-manual"
+    },
+    "guide\\http\\testing.md": {
+      "sourceHash": "1384a4f484ddce1564f34699cfb4b69cb14a04074598702f9e536465f40a6b76",
+      "targetHash": "edcf55e5b728123b0618935fa2b50695e6ed401d71ad34e3c167c2eb6ab076c4",
+      "translatedAt": "2026-07-19T12:06:22.213Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\example.md": {
+      "sourceHash": "caeb411f78e9596a28cd7dcaf3f677a031cd025ee474a785cfb860aca72ada08",
+      "targetHash": "5abb24f60de9145502a113697d6b8364b33c5a7ab947c3e38da9dc36b5d74693",
+      "translatedAt": "2026-07-19T09:06:44.446Z",
+      "model": "codex-manual"
+    },
+    "guide\\image-optimization.md": {
+      "sourceHash": "b87af5bc43a81bfbe82ebe764202131517fb22db3aa89e21c1c6d927564a92cc",
+      "targetHash": "0f2e69891379bd6ad0e5bbaa3606ad4b43d7ef5055135b88a4719dc2a59f8aad",
+      "translatedAt": "2026-07-19T09:58:59.417Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\common-router-tasks.md": {
+      "sourceHash": "be3f4dc71a78c95d1b6fd876398e066f91f70f6bbfd0108615e216a44ec0d93a",
+      "targetHash": "40c3bd2366425db964b37219be5c66018b436275f2d48bce4e303aac0a283980",
+      "translatedAt": "2026-07-19T10:38:07.804Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\customizing-route-behavior.md": {
+      "sourceHash": "d7f34219fd6e504c2dd5d9a11f39ea9d07c2cf9fac3bc9ffaed26be7b49c7905",
+      "targetHash": "530aaa6928048c3dc5beb244451a85843b090f8d7d37e843ab262f935d55d252",
+      "translatedAt": "2026-07-19T10:38:42.443Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\data-resolvers.md": {
+      "sourceHash": "e7634058fa9b1214f023f128a5702bb5ad1eb7d7fcbde0e802770be5c4f66b55",
+      "targetHash": "02c44639681ea6c24d4e3f9a28e219b10a11fb11f9c88a2177cf89b89ae23721",
+      "translatedAt": "2026-07-19T10:38:07.806Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\define-routes.md": {
+      "sourceHash": "8ac1f699c0d5c30bb2d1b3b61e9f544bc2a8c9920f7f7572a727b5f4f9113750",
+      "targetHash": "e9c3a7bf50a24a3e172af5c92cb386a08abe36bf30edd0750b2d81dde9f05b20",
+      "translatedAt": "2026-07-19T10:38:07.806Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\lifecycle-and-events.md": {
+      "sourceHash": "5ab70abe99873e510a25bc2e53ebce0d95b7ec0bce6fd2f4a17bc4461b1c2aaf",
+      "targetHash": "d36faa8a7d39278bcf0f38a59e1c58f75c76602131f18f021c94970c659aab29",
+      "translatedAt": "2026-07-19T10:38:07.807Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\loading-strategies.md": {
+      "sourceHash": "0d4254bad033da5fb8622c9111581dbbc76980cdf07eafe51f2475a14d9095ac",
+      "targetHash": "5eb10529a7b24161cd6276b83fafa47ca646945321ff4119c0dd43befe66b7ad",
+      "translatedAt": "2026-07-19T10:38:07.807Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\navigate-to-routes.md": {
+      "sourceHash": "71e86ec31426db54b6e859ea22b640ba5bdfb36ce67b168525a8349ba4fd11ef",
+      "targetHash": "743dfc2a82b950aced8b664a87203a1f0971d2fd455170c96cb143c6da335d51",
+      "translatedAt": "2026-07-19T10:38:07.808Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\overview.md": {
+      "sourceHash": "db3b8368ae7a98965eb569c7452f2c20ddacf9482f221279b270d9e7ebcb599f",
+      "targetHash": "61a76518ce12b5ef8f270cc8631cfa11418b21c00ec4dd9f7115d7a1c1429888",
+      "translatedAt": "2026-07-19T10:38:07.808Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\read-route-state.md": {
+      "sourceHash": "6cb3eb50b6faa12e16d2c4d4c930d169ae3207790a9b902a666381626861663b",
+      "targetHash": "71c2ba4de83599a66c9ea8f9aa36f8be974cb4243c5892766d8c7771a7a3c6ef",
+      "translatedAt": "2026-07-19T10:38:07.809Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\redirecting-routes.md": {
+      "sourceHash": "6c2ec80f0e93db8f319b81e030154d2f00bbf12ad83dd7e6c0c04077286b6abe",
+      "targetHash": "26aeb18f5662d3ad4104604b58d575b3b95cb42b4a23666e0976b9b1413a9df2",
+      "translatedAt": "2026-07-19T10:38:07.810Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\rendering-strategies.md": {
+      "sourceHash": "035dd9d4bdc3e94b6d80c7fd45d4f08c05ef91fd6c49a54d371697d17e5069e6",
+      "targetHash": "40c79c63b931890205b983e882c409e70b741300aebf16e13c79b2616abcaa47",
+      "translatedAt": "2026-07-19T10:38:07.810Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\route-guards.md": {
+      "sourceHash": "26ef616c079909fa597d6dca20ff9162bc89c8c648eeb57d6b25bb805a1c8b6e",
+      "targetHash": "34f155fcfdaeed73924b783c986951a96abea48362c0c4c0783ba390070dce1b",
+      "translatedAt": "2026-07-19T10:38:07.810Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\route-transition-animations.md": {
+      "sourceHash": "d16a76fe4d18f790a27c66eec98274a241e0572f4e535acd234eb6c74a2cdcc1",
+      "targetHash": "178bc7018ccbc3e47e8a5ee01b607e468f9b6c6bf02846c848caf96074b6b0c4",
+      "translatedAt": "2026-07-19T10:38:42.444Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\router-reference.md": {
+      "sourceHash": "2805018a9d59e9bc334f03e638b242ebb5619109bd67b3d26178c306dd2ec3ed",
+      "targetHash": "1254bd41eef2c12c357a6d50e26f991430a1b471212978f96c08b283b73e4786",
+      "translatedAt": "2026-07-19T10:38:42.445Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\routing-with-urlmatcher.md": {
+      "sourceHash": "72e68a95436b03d20e967a23584445c21a8df29741ae17a1d46b64eadfe0f6a1",
+      "targetHash": "ed344fcde09d85cf7227c1d15c0397062bf133c64e431bbf29ba500f21225169",
+      "translatedAt": "2026-07-19T10:38:07.811Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\show-routes-with-outlets.md": {
+      "sourceHash": "569e1c219d1f7b92c46d2c6c1aefbf38c3046d43ad51d1101d5aeed70b98f138",
+      "targetHash": "668744d27866d52ce26dbba58d5f5dd363f864336f032021c12042d650f82bb6",
+      "translatedAt": "2026-07-19T10:38:07.811Z",
+      "model": "codex-manual"
+    },
+    "guide\\routing\\testing.md": {
+      "sourceHash": "45c3d6b1ff3b5947a77362845e2db86cf962d61699c09b0911247d7f5012acf9",
+      "targetHash": "77f414becad363c98bb8c1378b82a703f0ae408ed4e516e8c91b2f79d66300aa",
+      "translatedAt": "2026-07-19T10:38:07.812Z",
+      "model": "codex-manual"
+    },
+    "guide\\signals\\debounced.md": {
+      "sourceHash": "b52df5347530cf1dea543e66c03b5f6a96b94ee9b8f51fe8557a06bab78c2b53",
+      "targetHash": "d491ca37f195e3c65e0afdd2ace780425b89c32c38109aab76e21aa7a6aba1e7",
+      "translatedAt": "2026-07-19T09:17:29.359Z",
+      "model": "codex-manual"
+    },
+    "guide\\signals\\effect.md": {
+      "sourceHash": "a7755001d919186cfaaa880435cb7927f0b1d7f6152457f6b75164178a70522a",
+      "targetHash": "f9777785cd029032e1bf453f0848110ae31af3976a41e8ca6121e73235bec854",
+      "translatedAt": "2026-07-19T09:20:03.196Z",
+      "model": "codex-manual"
+    },
+    "guide\\signals\\linked-signal.md": {
+      "sourceHash": "0cd18f83e097427bcb0ed05aa121387492916cc4beace8c21eb81ef7660bb867",
+      "targetHash": "8220463fed68faec39a46f5aa4f740578c912354ffe789977009f61efae3fd5f",
+      "translatedAt": "2026-07-19T09:17:29.359Z",
+      "model": "codex-manual"
+    },
+    "guide\\signals\\overview.md": {
+      "sourceHash": "1de011827f9491d610c0b5e43b93e6a40fc3a7caa7cf76bf83bd794a5106d7dd",
+      "targetHash": "92cca4c406367ccae01ef6b91a585f8fbaa795f81ae7df831819511885819dbd",
+      "translatedAt": "2026-07-19T09:17:29.357Z",
+      "model": "codex-manual"
+    },
+    "guide\\signals\\resource.md": {
+      "sourceHash": "b6e1c0323c006ce1561c692f9bea74f08afe5917580e9ad72b6b1cf735035cf4",
+      "targetHash": "6436ca3160a3aaa411aae6fcc085fe0bb0cdd7f768b408afb2d758f64b95f3d4",
+      "translatedAt": "2026-07-19T09:20:03.198Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\binding.md": {
+      "sourceHash": "d75942fc8c7501acc0799e28ffe03e32a297dd82c402b3766b089f00fbcd25fb",
+      "targetHash": "efdd4f79ef4a6fe48af6b7059dec7e8ddc0153f3af8894abc0eaa2c1a704ddb6",
+      "translatedAt": "2026-07-19T09:44:01.469Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\control-flow.md": {
+      "sourceHash": "17ad508df1a704ed1cbe49555a66f90f29613bb6164a2c6bc08eabac77fe0ba6",
+      "targetHash": "95ed85b5f16f36b10715b8f30f0a172b89b677e7936029c68a5c56ee8f480f3a",
+      "translatedAt": "2026-07-19T09:44:01.471Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\defer.md": {
+      "sourceHash": "7eb5c58939be0d5142101ada150638f097c144f55caf1b5fef917cc56008d79e",
+      "targetHash": "15aad219bf6b6c1eee36f3c619fa1f801d9e903016af629b6e9c2fa8e70a7e74",
+      "translatedAt": "2026-07-19T09:50:16.180Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\event-listeners.md": {
+      "sourceHash": "d4a29fc120eec62f830cff7c52a758cb834e08a0116663040cb1a195a1d1c028",
+      "targetHash": "264f4494f96e3236723bc10da6aaa2c79ae09a6dd25253cbea8cef77acef01f6",
+      "translatedAt": "2026-07-19T09:44:01.470Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\expression-syntax.md": {
+      "sourceHash": "bfc7001f59ba98c1a75fe1e205736319aa9642b6fefec268dbe4635498de8764",
+      "targetHash": "3f7598db732cf7e6f9f06dd1bafba8d6d7d6c9af751e53b4ea3a0d9e3ab02322",
+      "translatedAt": "2026-07-19T09:47:03.140Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\ng-container.md": {
+      "sourceHash": "24408587a2b84efa6a282369c5db1433e4a7eb0a49ad7dfafcea06e9c329a21d",
+      "targetHash": "e8f799108009bf8128c25e626f13427d4bc1ace09dfcbf557d28ce69848216e6",
+      "translatedAt": "2026-07-19T09:41:34.587Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\ng-content.md": {
+      "sourceHash": "952538ad883affe9fdd5b3044c601006d498de33a0b973be0fde12e030254d17",
+      "targetHash": "806095380dc16fd362c006de5fc5e2b623d6ebe83ec69cac55a0d05d30352ce3",
+      "translatedAt": "2026-07-19T09:50:16.180Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\ng-template.md": {
+      "sourceHash": "3ea596aae190595eb6d56b38e1830fca6aac3924fa85d40b946bb87c6e3a9eed",
+      "targetHash": "3cafad29ac17f5770e9ab20a715205136a1090c4814520df82c49053abe3007c",
+      "translatedAt": "2026-07-19T09:50:16.178Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\overview.md": {
+      "sourceHash": "0ad26f5d36e6ced5474109113ae54233d243134f2847eb2c96e518cd720e43a5",
+      "targetHash": "40e83adc052f8996b9421c3f7df6f8daa2e753943146b014b38686585b45b74b",
+      "translatedAt": "2026-07-19T09:41:34.585Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\pipes.md": {
+      "sourceHash": "ffa57a831269f705538c09d99b9d77a1998fa3603580d8c3adeec240832a96f8",
+      "targetHash": "a0c5b81a79bfa685e9716e13eaa6b2e0d91423306c135f2de3c6fa324f89d18d",
+      "translatedAt": "2026-07-19T09:47:03.139Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\two-way-binding.md": {
+      "sourceHash": "dcdf8a10ec76b5ebcf40a4de14cdabefa3fa3349f0595d619531788e1715f7ad",
+      "targetHash": "5c6cd9fd3ae67c2cde2bd2fb44c0ae56a2634bc7b4a1e39b8d714c6fc28bee09",
+      "translatedAt": "2026-07-19T09:41:34.587Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\variables.md": {
+      "sourceHash": "7f1d827b4ce4c3f892455a49fb7decc2f3de7bd6d7a4025e65bc15b55edba8f8",
+      "targetHash": "fc6c120f9d39b98534b31fbc7c873e652bef2664c34cb0bfa5d2cb7a9e0f5bd4",
+      "translatedAt": "2026-07-19T09:47:03.140Z",
+      "model": "codex-manual"
+    },
+    "guide\\templates\\whitespace.md": {
+      "sourceHash": "db3a323fa236719e7e85a29cea75d57b5c04f736bcb27f02664c3be9cc8faa47",
+      "targetHash": "613afadcf0bb1bada3a8d7bbb5e10d7d007b889a2ee51187db64e36afaf2fedf",
+      "translatedAt": "2026-07-19T09:41:34.587Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\debugging.md": {
+      "sourceHash": "c8bcba7ab627dbd929f5cdaf977594425c02350d762803c22e0416215456154b",
+      "targetHash": "c7a0f4d53bb500448202ee091356f9fc68f56f518b0eb74a9cea73bc623e8d82",
+      "translatedAt": "2026-07-19T09:06:44.447Z",
+      "model": "codex-manual"
+    },
+    "introduction\\essentials\\components.md": {
+      "sourceHash": "58d45634314c32c30169d3ac957a889eb4ba727073864a6f086fe5bd1cb40ef4",
+      "targetHash": "0629da04a49efa5592830007455966eba31db3cc0b326411491fad60b002a07f",
+      "translatedAt": "2026-07-19T08:38:34.939Z",
+      "model": "codex-manual"
+    },
+    "introduction\\essentials\\dependency-injection.md": {
+      "sourceHash": "7deac9f0cd271da0c16e794876423cce8ba918f6ceb1d2e0ebdcf655aacb2163",
+      "targetHash": "bc7b10006fc722a8a612db03cf829bd952b32afa290057b4a31df18d23ace6be",
+      "translatedAt": "2026-07-19T08:38:34.941Z",
+      "model": "codex-manual"
+    },
+    "introduction\\essentials\\next-steps.md": {
+      "sourceHash": "3c999f34584eb2216e85f4772fc6d64f3dbd97a3feebfb5425ffd5adf4830aa1",
+      "targetHash": "97b4a01a54e3459e62fb06d90455970b93d1870c85eb3309eee0f2c7793b600f",
+      "translatedAt": "2026-07-19T08:38:34.941Z",
+      "model": "codex-manual"
+    },
+    "introduction\\essentials\\overview.md": {
+      "sourceHash": "6bc33373b25427cf46fa416f29596aa9f9233008cf7f3f30b4b048531d05aa66",
+      "targetHash": "014e508f8be2f9dd9748d39f5303181ed961f2c2a6a9162611f0987bf26e61a8",
+      "translatedAt": "2026-07-19T08:38:34.939Z",
+      "model": "codex-manual"
+    },
+    "introduction\\essentials\\signal-forms.md": {
+      "sourceHash": "b74c0af000c6dbc30ebd61fbf6b840821a7c07124919f0ee5597d9c2a04c7aa6",
+      "targetHash": "ec3916a592f8204362f4cde2e07e84ff7b482c8796186a83c137bde437bc89a2",
+      "translatedAt": "2026-07-19T08:38:34.940Z",
+      "model": "codex-manual"
+    },
+    "introduction\\essentials\\signals.md": {
+      "sourceHash": "5143b4298c04d0d6d31d717e8217aabc146567e74f41829bccf790da7a594060",
+      "targetHash": "74bcf4448da327fa0fab88f111045aa408bfe46809f50feaa131edcb7193d494",
+      "translatedAt": "2026-07-19T08:38:34.939Z",
+      "model": "codex-manual"
+    },
+    "introduction\\essentials\\templates.md": {
+      "sourceHash": "18f9f9a7fa8e94bbc8f765a4ec96deff6f4f9bb6029b2026e85e9f3058ca96bf",
+      "targetHash": "8bb6676f5642879167f69e7123ee580fe61089de1facebb3d132b030f05e3c4c",
+      "translatedAt": "2026-07-19T08:38:34.940Z",
+      "model": "codex-manual"
+    },
+    "introduction\\installation.md": {
+      "sourceHash": "f2ef52ea4f34ba09a7b9fd05e6dcb81acd7c11786ccb15dc0c764e92ce18ecef",
+      "targetHash": "442dfe14d81a0bd136ca960d7ba2ab2c063bb66d4240f6ac073e693e2420e775",
+      "translatedAt": "2026-07-19T08:38:34.937Z",
+      "model": "codex-manual"
+    },
+    "reference\\concepts\\overview.md": {
+      "sourceHash": "0d0b894d7b2927c666b9b5b92d5e38a39874d4e6a0162a34aa158ff7e676f290",
+      "targetHash": "c8f761f3b576029d43bb7bf4d869a0d697efde8227eece72ea9c0a07ce2cb81b",
+      "translatedAt": "2026-07-19T09:05:05.525Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG01101.md": {
+      "sourceHash": "a6a52fd3370e6aa92f18ffbd16def243d987c5898c950c9651934be4e660447a",
+      "targetHash": "f6d8b183ba90121feb99834787117e5c9bcb7095aa28acaf2d59430151b29934",
+      "translatedAt": "2026-07-19T08:41:07.885Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0200.md": {
+      "sourceHash": "8ae88cf801f07f1f81f6e1e1d4cee61964b7c8675f283dd8c8d0118ba073f26a",
+      "targetHash": "2f7c76fe773686a20dabf4f149607ac354bd45491732a2be619ddf07c401bc19",
+      "translatedAt": "2026-07-19T09:06:44.446Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0201.md": {
+      "sourceHash": "819ecb624593fc3cd9aa3bad7039ede13d43ff7c36b44c92b72284cc46e9f18b",
+      "targetHash": "2d3dc0cc4eb676ba7a8650df82312bdb0b444bfc9f1cd92a0359399e2c632f14",
+      "translatedAt": "2026-07-19T09:05:05.527Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0209.md": {
+      "sourceHash": "2972718dd5bae2f29504316b13d186378b498f77de9ceb47ac0af7a292385276",
+      "targetHash": "ea33e05d5bed73689ef74f93ff9767dbd40776933d9b27f50ed16bc8f0d71a97",
+      "translatedAt": "2026-07-19T08:41:07.882Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG02200.md": {
+      "sourceHash": "6a47650f118895b1881dfa7a81b4cd37a0b7729aa8539b15a6f63121731b7672",
+      "targetHash": "99e0dd27ff90bbccae6ea3784de47706bce34a9fd6e6f24484dd9e501c296d50",
+      "translatedAt": "2026-07-19T08:41:07.883Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG02800.md": {
+      "sourceHash": "447e5ffaba36822751d4dce659a3e378fa11570456d8ca363571b177c26ca460",
+      "targetHash": "b12bbfcc5f70a4a10eb7c30e7e44880bdbbdd417702e52c93c66315fa2807e3a",
+      "translatedAt": "2026-07-19T09:05:05.527Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0301.md": {
+      "sourceHash": "7b9cae064d4dab0e834ba134c46d10b84289250ddedb797fa9dc3c44c38692d6",
+      "targetHash": "d2b72d0d832feedd4de7f7efa160470ba8ee1dffede8ed31d13dd1bb9acfb710",
+      "translatedAt": "2026-07-19T09:08:11.191Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0302.md": {
+      "sourceHash": "b282c8a0b9015f64ee302e2115d9ffd18661d93bb4ceca9ff065b33e63483d37",
+      "targetHash": "133a3899cef54f607562a7e15e04428e9b9ec72f52040c29cf022e69ac5d50dc",
+      "translatedAt": "2026-07-19T09:06:44.446Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0401.md": {
+      "sourceHash": "7f3b5addc11ade1d658d212a894c08efbc625bdc410f4938286d3c53b36d1ff6",
+      "targetHash": "400e81dee7c4f1eed98e694fb7f8108174dbc2c637caa0313fdf99a176de0d9f",
+      "translatedAt": "2026-07-19T08:41:07.885Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0500.md": {
+      "sourceHash": "71903f10d7a27864b430a75c3f01ce72ffcc616e48b963f75a7982fe791289d4",
+      "targetHash": "2e7f8dbaf91b8f210409699942475eb264c3ba2c47ba64683d638c8e95b91219",
+      "translatedAt": "2026-07-19T09:05:05.529Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG05000.md": {
+      "sourceHash": "a00498123eb217c4b61ee3b678306d2dea58cae8fb421afd6e4948c594bb26cc",
+      "targetHash": "ec745c05b61a5c507b0cff3d4c0a8fb48a5180dbeb7eeca251f4929f044d665b",
+      "translatedAt": "2026-07-19T09:08:11.190Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0501.md": {
+      "sourceHash": "c5fbba3f9661d401862edb7e9035a33d45302d8b1a6debc329b1c98c06d49dbe",
+      "targetHash": "c139dd49d27f689456af2c0cc71b3b108f07b9b2e63e9eb91e5295a2f787fb99",
+      "translatedAt": "2026-07-19T08:41:07.883Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0502.md": {
+      "sourceHash": "b4a322762f37cfc865d139ea9262f8e8c4bc1f723e0dfeade83ffcebccff444e",
+      "targetHash": "aaab610010cf5625a83b40b0b790b21a8fd034fc83bce7aa359afe129ec2ec75",
+      "translatedAt": "2026-07-19T08:41:07.884Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0504.md": {
+      "sourceHash": "9d1122614a5414925dc3ed650c945f5ebc3fd764958242976668cdebc7c88ee5",
+      "targetHash": "04be083554092980f96d26c7150523dbe13996c5847994195b6ee6cbadc46521",
+      "translatedAt": "2026-07-19T09:08:11.192Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0505.md": {
+      "sourceHash": "9c02ab65d6ebd39fa6889d263f9644025db37b6c30fb9f0ae37475cad82a03e0",
+      "targetHash": "f583b0e8d6a61b26429c8b01fb602281a00d9b4fbdda4d6597c4c1725ae57f62",
+      "translatedAt": "2026-07-19T09:08:11.193Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0507.md": {
+      "sourceHash": "3e7f16da21380dc8fc6ad5835dd8e963b0e0eb9a39dff840a50d43309ee03ae9",
+      "targetHash": "ca39a5911670a71a7b5e95899da4751fdb73629a14f039b324fe32087b09c0a2",
+      "translatedAt": "2026-07-19T09:05:05.528Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG05101.md": {
+      "sourceHash": "154f2d5257cad8b23b05c5be6c755185cc227f25c76b9c6906b39a55fa975d7a",
+      "targetHash": "fb2872052b7c90a449fd30958852c9ab8692e19ab57012c64d63b46817eb66d6",
+      "translatedAt": "2026-07-19T09:06:44.447Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG05104.md": {
+      "sourceHash": "cd5b7589530e03a9482b735d2712835be35f51a9cdcd3341e769351af7674146",
+      "targetHash": "bd9e4a5489cb93d67e414a67053b391124dd3280d8d6eae444649b4089e32e6a",
+      "translatedAt": "2026-07-19T08:41:07.885Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0750.md": {
+      "sourceHash": "b9221d6987628c3c6c5262e0072caec9077308f3f206ad3aa2da9e2390a157be",
+      "targetHash": "17a516f90fdd2ed51eff82b948a99d376d50d5f6821cc23e32fe9895eb9340cb",
+      "translatedAt": "2026-07-19T08:41:07.884Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0751.md": {
+      "sourceHash": "e67115600379e4b4dd20101db83957d9dda17ed26e24272997b91b60281af07c",
+      "targetHash": "024b9a8f16da89d0230ae3f84d727f6cdf0e0d5397704b31d0d0e66f6ca69000",
+      "translatedAt": "2026-07-19T09:05:05.528Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG0950.md": {
+      "sourceHash": "8a369ebe5df609ab1054cde90d491847fb406c6fe25a021b2b308bc8598b6592",
+      "targetHash": "f5ee59815bf77cc851dd551d7ee23b1daa5e2ad2c2f1b67ec90357cb2a1e702d",
+      "translatedAt": "2026-07-19T08:41:07.884Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG1001.md": {
+      "sourceHash": "f7f355b939b5fbf17c7420b92389b7f69af7aca4162605e292f28689b9c0c49e",
+      "targetHash": "7733a1684318a0796dba9a522b1de0c123163e5d927a7bb6fb64d6c733478683",
+      "translatedAt": "2026-07-19T09:05:05.527Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG2003.md": {
+      "sourceHash": "9d6eb5ba873a0e27107030f4e0c14e0f9f62e4db45689809696c6a14e3c94b42",
+      "targetHash": "447338fa6fbc3ade174a93e5ce39554524efae182751326a447326a06e6f5ad5",
+      "translatedAt": "2026-07-19T08:41:07.885Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG2009.md": {
+      "sourceHash": "057e0cc8a3e2145b8e878a2109e985afa84ff494688ab90e9a73a877b6b2d1e1",
+      "targetHash": "7b8ec9d26d0a4239f85153a99b05576a562bf124045f914db3bb24ec17b48a60",
+      "translatedAt": "2026-07-19T08:41:07.884Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG8001.md": {
+      "sourceHash": "c783c58c4bb61180baa9634aebd532e8a2282962abf8d5de183f73907c168c97",
+      "targetHash": "0d4cafa37485f0f26870849628c18cf5d28c6c3186fd5628701fc62a765e3cdb",
+      "translatedAt": "2026-07-19T09:08:11.192Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG8002.md": {
+      "sourceHash": "e8270ab7ae711fcc680f8ef24becb89ddd29abb5f8b61025c725991ff164e097",
+      "targetHash": "87f62b67dac2cca1c3cdbef98e95e20c2305210cb6bd818b9878f60a8096a807",
+      "translatedAt": "2026-07-19T08:41:07.885Z",
+      "model": "codex-manual"
+    },
+    "reference\\errors\\NG8003.md": {
+      "sourceHash": "75514034664c1811099301389d7dafcf9f538c389fdf3064bfe8d56cd9a455c1",
+      "targetHash": "8c58a6fdf66c72d400a5295d5d03c30532c7293f1b3a080002be0b1b8e08f093",
+      "translatedAt": "2026-07-19T09:06:44.446Z",
+      "model": "codex-manual"
+    },
+    "reference\\extended-diagnostics\\NG8106.md": {
+      "sourceHash": "36b7e8e129402c975b5af2ca29f01563835c8bec169a501eb8461d981575483f",
+      "targetHash": "286ade643b0515f18c8d4eb309510e251e712d3bf40c4998599fe6ea3d185cfc",
+      "translatedAt": "2026-07-19T09:08:11.192Z",
+      "model": "codex-manual"
+    },
+    "reference\\extended-diagnostics\\NG8113.md": {
+      "sourceHash": "5651343f6f0de2e9fd18ba378f185a0bd59ce2bdd25badb86c5c50f377718fe0",
+      "targetHash": "b02fa6cc2a921fd45ec3b9bd56a938208aec9631492a82e7738cc1ca638cd9ac",
+      "translatedAt": "2026-07-19T09:05:05.529Z",
+      "model": "codex-manual"
+    },
+    "reference\\migrations\\cleanup-unused-imports.md": {
+      "sourceHash": "279e3fc37d35633e1475cc9b3e08644941aa64d4c94f33fe6e54b74809102169",
+      "targetHash": "2bd8e061f0dd23aaee9d1c17db9e6608cf6c983c321959d3becb2169bb162c59",
+      "translatedAt": "2026-07-19T08:39:50.302Z",
+      "model": "codex-manual"
+    },
+    "reference\\migrations\\control-flow.md": {
+      "sourceHash": "1b43be0c2ef4cfc29b33f3ef945ddc614f09626a279732c93804da2ba1b754ff",
+      "targetHash": "24096c38979ac05b667a3ee51515237cef63113eb1dd7a2fd94cc860b7f61807",
+      "translatedAt": "2026-07-19T08:39:50.303Z",
+      "model": "codex-manual"
+    },
+    "reference\\migrations\\ngclass-to-class.md": {
+      "sourceHash": "4f32eabc336d95f98e228cbb7ea770f5524a186293a8b8f3a8a88543176f599d",
+      "targetHash": "875d22836425908a4b231ea65572cb4d9d2c2ff16bf4d2275d1bae9e4c654908",
+      "translatedAt": "2026-07-19T09:08:11.192Z",
+      "model": "codex-manual"
+    },
+    "reference\\migrations\\ngstyle-to-style.md": {
+      "sourceHash": "4cc258aa3cb2ce38d2f9c9deeeb98c53a5a1ed081e0c60f320db368c3c994c6f",
+      "targetHash": "980f75db4e95e0089388f33b1252c7d2a2656092a242e6053774f03c31476fcf",
+      "translatedAt": "2026-07-19T09:06:44.447Z",
+      "model": "codex-manual"
+    },
+    "reference\\migrations\\self-closing-tags.md": {
+      "sourceHash": "051c600010811dff3b45d2f86ec3543ba8335044b9548b5745d7e5f61a6ab316",
+      "targetHash": "44a886baf7cb98b959b21af6b00d1dedf263191fff7ff3b1e5f0ccc0ead86ee8",
+      "translatedAt": "2026-07-19T08:39:50.302Z",
+      "model": "codex-manual"
+    },
+    "tutorials\\deferrable-views\\intro\\README.md": {
+      "sourceHash": "04ef7b30539136843c48b96b987053cca71d33fdf93651f453bdcc6ce74d5934",
+      "targetHash": "42db626e1022dc699a5e73eb982fee3fba39bf0e02181159fb7a60b47008d7c7",
+      "translatedAt": "2026-07-19T08:39:50.303Z",
+      "model": "codex-manual"
+    },
+    "tutorials\\home.md": {
+      "sourceHash": "804003ce63755d52594ef72eb395177dee679064c9843d6dd9c05922f8afdce7",
+      "targetHash": "59d896d728fdda9db282cdaae27d5626457441755b53ccfbf930d3f528ae48c5",
+      "translatedAt": "2026-07-19T08:42:36.763Z",
+      "model": "codex-manual"
+    },
+    "tutorials\\learn-angular\\intro\\README.md": {
+      "sourceHash": "61111ec9a62317bb1aa3b6f337f9998e226b4bcf6c93f45ad92737e232471450",
+      "targetHash": "5b074f5cb0d5acdcdfb072f26a7326713e791342e67a77c641abe22da2dc624b",
+      "translatedAt": "2026-07-19T08:39:50.303Z",
+      "model": "codex-manual"
+    },
+    "tutorials\\learn-angular\\steps\\25-next-steps\\README.md": {
+      "sourceHash": "3219e560edda6fa83f506f985bc9b8d5922eff1b4b141d400d0af8b47640319b",
+      "targetHash": "f7812cfe8819efef72afe1595809614a64cf147328646dbd5ca28ff10f695cf8",
+      "translatedAt": "2026-07-19T08:39:50.304Z",
+      "model": "codex-manual"
+    },
+    "tutorials\\signal-forms\\intro\\README.md": {
+      "sourceHash": "a8f7e437f7a0922ef92cfaafd0e2b5d62abc3193cf76246a9ea90d8ddc561a87",
+      "targetHash": "636dfe9f8617cf146d5c3b1ed345eb6fbebb3987cbf08f2410d25111ab12b12f",
+      "translatedAt": "2026-07-19T09:06:44.446Z",
+      "model": "codex-manual"
+    },
+    "tutorials\\signals\\intro\\README.md": {
+      "sourceHash": "f7b92f648fc059cade5503c07d76342c5d2380280c4dc54b25f4ed4fdfc82506",
+      "targetHash": "ea4f136adf2d753318478fb064122ac0a31e38d3003c9face7725702b49abf3c",
+      "translatedAt": "2026-07-19T08:39:50.303Z",
+      "model": "codex-manual"
+    },
+    "tutorials\\signals\\steps\\11-next-steps\\README.md": {
+      "sourceHash": "d367b80c1282076e19619b9bf5a3e0656779beae9fd27ee6a30bf63268d3a46b",
+      "targetHash": "d2c420e3ea0805a42a6f10ce0cc450ea7e0305cc3a2c02608497793dae6e3a72",
+      "translatedAt": "2026-07-19T08:39:50.303Z",
+      "model": "codex-manual"
+    }
+  }
+}

@@ -28,7 +28,7 @@ const slugify = (value: string) =>
   value
     .toLowerCase()
     .replace(/`([^`]+)`/g, '$1')
-    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
     .replace(/^-+|-+$/g, '');
 
 const getAttr = (source: string, attr: string) => {
@@ -352,6 +352,7 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
   let inCode = false;
   let codeLanguage = '';
   let code: string[] = [];
+  const headingIds = new Map<string, number>();
 
   const closeParagraph = () => {
     if (!paragraph.length) {
@@ -415,7 +416,10 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
       closeList();
       const level = heading[1].length;
       const text = stripTags(heading[2].replace(/`([^`]+)`/g, '$1'));
-      const id = slugify(text);
+      const baseId = slugify(text) || 'section';
+      const usedCount = headingIds.get(baseId) ?? 0;
+      const id = usedCount ? `${baseId}-${usedCount + 1}` : baseId;
+      headingIds.set(baseId, usedCount + 1);
       if (level > 1) {
         headings.push({ id, text, level });
       }

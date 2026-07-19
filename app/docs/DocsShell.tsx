@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { allDocs, getDocNeighbors, isRtlLanguage, navigationSections, type DocEntry, type Language } from './data';
 import type { NavigationItem } from '../routes';
 import type { RenderedMarkdown } from './markdown';
 import { CodeInteractions } from './CodeInteractions';
 import { DocsSidebar } from './DocsSidebar';
 import { LanguageSelect } from './LanguageSelect';
+import { TableOfContents } from './TableOfContents';
 import { ThemeToggle } from './ThemeToggle';
 import { localizeDocEntry, localizeNavigationItems, translateLabel, translateUi } from './i18n';
 
@@ -69,32 +71,54 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
   const breadcrumbItems = getBreadcrumbItems(localizedSectionItems, doc.href);
   const previousDoc = localizeDocEntry(neighbors.previous, language);
   const nextDoc = localizeDocEntry(neighbors.next, language);
+  const primaryNavigation = navigationSections.slice(0, 3).map((section) => ({
+    label: translateLabel(section.label, language),
+    href: getLocalizedHref(
+      allDocs.find((item) => item.section === section.label && item.contentPath)?.href ?? '/overview',
+      language,
+    ),
+    isActive: section.label === doc.section,
+  }));
   const isRtl = isRtlLanguage(language);
 
   return (
     <div className={['docs-app', isRtl ? 'rtl' : ''].join(' ')} dir={isRtl ? 'rtl' : 'ltr'} lang={language}>
-      <header className="topbar">
-        <Link className="brand" href={getLocalizedHref('/overview', language)} aria-label="Angular documentation home">
-          <span className="brand-mark">A</span>
-          <span>Angular Docs</span>
-        </Link>
-        <div className="topbar-actions">
-          <nav aria-label="Primary navigation">
-            {navigationSections.slice(0, 3).map((section) => (
+      <header className="
+                flex items-center justify-between gap-6 
+                sticky top-0 z-20 px-3 md:px-7 py-3 md:py-0 
+                border-b border-[var(--line)] 
+                bg-[var(--topbar-bg)]">
+
+        {/* right */}
+        <div className="flex items-center">
+          <Link
+            className="flex items-center gap-2.5 font-bold tracking-normal"
+            href={getLocalizedHref('/overview', language)}
+            aria-label="Angular documentation home"
+          >
+            <Image src="/logo.svg" width="32" height="32" alt="angular logo" />
+            <span className="min-w-max">Angular Docs</span>
+          </Link>
+        </div>
+          <nav className="hidden items-center gap-2.5 min-[821px]:flex" aria-label="Primary navigation">
+            {primaryNavigation.map((section) => (
               <Link
                 key={section.label}
-                href={getLocalizedHref(
-                  allDocs.find((item) => item.section === section.label && item.contentPath)?.href ?? '/overview',
-                  language,
-                )}
-                className={section.label === doc.section ? 'topbar-link active' : 'topbar-link'}
+                href={section.href}
+                className={[
+                  'px-2.5 py-5 text-sm font-semibold hover:!text-[var(--accent)]',
+                  section.isActive ? 'border-b-[3px] dark:!text-white  border-b-red-800 ' : '!text-gray-500 ',
+                ].join(' ')}
               >
-                {translateLabel(section.label, language)}
+                {section.label}
               </Link>
             ))}
           </nav>
-          <LanguageSelect language={language} />
+
+        {/* left */}
+        <div className="flex items-center gap-2 md:gap-4">
           <ThemeToggle />
+          <LanguageSelect language={language} />
         </div>
       </header>
 
@@ -104,6 +128,7 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
           items={localizedSectionItems}
           activeHref={doc.href}
           language={language}
+          primaryNavigation={primaryNavigation}
         />
 
         <main className="content-shell">
@@ -158,17 +183,7 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
 
         <aside className="toc" aria-label={translateUi('onThisPage', language)}>
           <div className="toc-title">{translateUi('onThisPage', language)}</div>
-          {rendered.headings.length ? (
-            <nav>
-              {rendered.headings.slice(0, 12).map((heading) => (
-                <a key={heading.id} href={`#${heading.id}`} className={`toc-link level-${heading.level}`}>
-                  {heading.text}
-                </a>
-              ))}
-            </nav>
-          ) : (
-            <p>{translateUi('noHeadings', language)}</p>
-          )}
+          <TableOfContents headings={rendered.headings} noHeadingsLabel={translateUi('noHeadings', language)} />
         </aside>
       </div>
     </div>
