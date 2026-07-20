@@ -1,6 +1,6 @@
 'use client';
 
-import { useDeferredValue, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react';
+import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import Link from 'next/link';
 import type { NavigationItem } from '../routes';
 import type { Language } from './data';
@@ -26,8 +26,15 @@ type FilterGroup = {
   nodes: SidebarNode[];
 };
 
+type StoredSidebarPosition = {
+  activeHref?: string;
+  anchorTop?: number;
+  scrollTop: number;
+};
+
 const filterStorageKey = 'angular-docs-sidebar-filter';
 const filterStorageEvent = 'angular-docs-sidebar-filter-change';
+const sidebarPositionStoragePrefix = 'angular-docs-sidebar-position';
 const sidebarLabelMaxLength = 195;
 
 const isExternal = (value?: string) => Boolean(value?.startsWith('http'));
@@ -74,6 +81,39 @@ const subscribeToStoredFilter = (onStoreChange: () => void) => {
 const setStoredFilter = (value: string) => {
   window.sessionStorage.setItem(filterStorageKey, value);
   window.dispatchEvent(new Event(filterStorageEvent));
+};
+
+const getSidebarPositionStorageKey = (tree: SidebarNode[], language: Language) =>
+  `${sidebarPositionStoragePrefix}:${language}:${tree.map((node) => node.label).join('|')}`;
+
+const getEscapedSelectorValue = (value: string) => window.CSS?.escape(value) ?? value.replaceAll('"', '\\"');
+
+const getStoredSidebarPosition = (storageKey: string): StoredSidebarPosition | undefined => {
+  try {
+    const stored = window.sessionStorage.getItem(storageKey);
+    return stored ? (JSON.parse(stored) as StoredSidebarPosition) : undefined;
+  } catch {
+    return undefined;
+  }
+};
+
+const setStoredSidebarPosition = (storageKey: string, position: StoredSidebarPosition) => {
+  try {
+    window.sessionStorage.setItem(storageKey, JSON.stringify(position));
+  } catch {
+    // Ignore storage failures; navigation should keep working even in restricted browsing modes.
+  }
+};
+
+const saveSidebarPosition = (storageKey: string, sidebar: HTMLElement, anchor?: HTMLElement, activeHref?: string) => {
+  const sidebarTop = sidebar.getBoundingClientRect().top;
+  const anchorTop = anchor ? anchor.getBoundingClientRect().top - sidebarTop : undefined;
+
+  setStoredSidebarPosition(storageKey, {
+    activeHref,
+    anchorTop,
+    scrollTop: sidebar.scrollTop,
+  });
 };
 
 const truncateLabel = (label: string) => {
@@ -308,7 +348,9 @@ const getFilterGroups = (items: SidebarNode[], filter: string): FilterGroup[] =>
 };
 
 export function SidebarNavigation({ items, activeHref, language, onNavigate }: SidebarNavigationProps) {
+  const navRef = useRef<HTMLElement>(null);
   const tree = useMemo(() => buildTree(items), [items]);
+  const sidebarPositionStorageKey = useMemo(() => getSidebarPositionStorageKey(tree, language), [tree, language]);
   const filter = useSyncExternalStore(subscribeToStoredFilter, getStoredFilter, getServerFilterSnapshot);
   const deferredFilter = useDeferredValue(filter);
   const trimmedFilter = deferredFilter.trim();
@@ -319,6 +361,58 @@ export function SidebarNavigation({ items, activeHref, language, onNavigate }: S
     const activeIds = getActiveExpandedIds(tree, activeHref);
     return activeIds.size ? activeIds : collectExpandableIds(tree);
   });
+
+  useEffect(() => {
+    const sidebar = navRef.current?.closest<HTMLElement>('.sidebar');
+
+    if (!sidebar) {
+      return;
+    }
+
+    const handleScroll = () => {
+      const current = getStoredSidebarPosition(sidebarPositionStorageKey);
+      setStoredSidebarPosition(sidebarPositionStorageKey, {
+        ...current,
+        scrollTop: sidebar.scrollTop,
+      });
+    };
+
+    sidebar.addEventListener('scroll', handleScroll, { passive: true });
+    return () => sidebar.removeEventListener('scroll', handleScroll);
+  }, [sidebarPositionStorageKey]);
+
+  useLayoutEffect(() => {
+    const sidebar = navRef.current?.closest<HTMLElement>('.sidebar');
+
+    if (!sidebar) {
+      return;
+    }
+
+    const restorePosition = () => {
+      const stored = getStoredSidebarPosition(sidebarPositionStorageKey);
+
+      if (!stored) {
+        return;
+      }
+
+      const targetSelector = `[data-sidebar-href="${getEscapedSelectorValue(activeHref)}"]`;
+      const target = sidebar.querySelector<HTMLElement>(targetSelector);
+
+      if (target && stored.activeHref === activeHref && typeof stored.anchorTop === 'number') {
+        const sidebarTop = sidebar.getBoundingClientRect().top;
+        const targetTop = target.getBoundingClientRect().top - sidebarTop;
+        sidebar.scrollTop += targetTop - stored.anchorTop;
+        return;
+      }
+
+      sidebar.scrollTop = stored.scrollTop;
+    };
+
+    restorePosition();
+    const frame = window.requestAnimationFrame(restorePosition);
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeHref, isFiltering, sidebarPositionStorageKey]);
 
   const preserveSidebarPosition = (origin: HTMLElement, update: () => void) => {
     const sidebar = origin.closest<HTMLElement>('.sidebar');
@@ -347,19 +441,29 @@ export function SidebarNavigation({ items, activeHref, language, onNavigate }: S
     preserveSidebarPosition(origin, () => {
       setExpandedIds((current) => {
         const ancestorIds = getAncestorIds(tree, node.id);
+        const next = new Set([...current, ...ancestorIds]);
 
         if (current.has(node.id)) {
-          return new Set(ancestorIds);
+          next.delete(node.id);
+          return next;
         }
 
-        return new Set([...ancestorIds, node.id]);
+        next.add(node.id);
+        return next;
       });
     });
   };
 
   const selectNode = (node: SidebarNode, origin: HTMLElement) => {
+    const sidebar = origin.closest<HTMLElement>('.sidebar');
+    const anchor = origin.closest<HTMLElement>('.sidebar-node') ?? origin;
+
+    if (sidebar) {
+      saveSidebarPosition(sidebarPositionStorageKey, sidebar, anchor, node.href);
+    }
+
     preserveSidebarPosition(origin, () => {
-      setExpandedIds(new Set(getAncestorIds(tree, node.id)));
+      setExpandedIds((current) => new Set([...current, ...getAncestorIds(tree, node.id)]));
     });
     onNavigate?.();
   };
@@ -387,11 +491,17 @@ export function SidebarNavigation({ items, activeHref, language, onNavigate }: S
     }
 
     return (
-      <div key={node.id} className="sidebar-node sidebar-filter-result" data-sidebar-node-id={node.id}>
+      <div
+        key={node.id}
+        className="sidebar-node sidebar-filter-result"
+        data-sidebar-node-id={node.id}
+        data-sidebar-href={node.href}
+      >
         <div className="sidebar-row depth-1">
           <span className={['sidebar-toggle-placeholder', isActive ? 'active' : ''].join(' ')} aria-hidden="true" />
           <Link
             href={linkHref}
+            scroll={false}
             className={['sidebar-link', isActive ? 'active' : ''].join(' ')}
             target={isExternal(linkHref) ? '_blank' : undefined}
             rel={isExternal(linkHref) ? 'noreferrer' : undefined}
@@ -427,7 +537,7 @@ export function SidebarNavigation({ items, activeHref, language, onNavigate }: S
       const content = renderLinkContent(node);
 
       return (
-        <div key={node.id} className="sidebar-node" data-sidebar-node-id={node.id}>
+        <div key={node.id} className="sidebar-node" data-sidebar-node-id={node.id} data-sidebar-href={node.href}>
           <div className={['sidebar-row', depthClass].join(' ')}>
             {hasChildren ? (
               <button
@@ -450,6 +560,7 @@ export function SidebarNavigation({ items, activeHref, language, onNavigate }: S
             {linkHref ? (
               <Link
                 href={linkHref}
+                scroll={false}
                 className={['sidebar-link', isActive ? 'active' : ''].join(' ')}
                 target={isExternal(linkHref) ? '_blank' : undefined}
                 rel={isExternal(linkHref) ? 'noreferrer' : undefined}
@@ -475,7 +586,7 @@ export function SidebarNavigation({ items, activeHref, language, onNavigate }: S
     });
 
   return (
-    <nav className="sidebar-navigation">
+    <nav ref={navRef} className="sidebar-navigation">
       <div className="sidebar-filter">
         <div className="sidebar-filter-input-wrap">
           <input
