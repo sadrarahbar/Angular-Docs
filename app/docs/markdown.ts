@@ -22,6 +22,8 @@ const escapeHtml = (value: string) =>
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#039;');
 
+const escapeAttribute = escapeHtml;
+
 const stripTags = (value: string) => value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 
 const slugify = (value: string) =>
@@ -32,8 +34,20 @@ const slugify = (value: string) =>
     .replace(/^-+|-+$/g, '');
 
 const getAttr = (source: string, attr: string) => {
-  const match = source.match(new RegExp(`${attr}="([^"]*)"`, 'i'));
-  return match?.[1] ?? '';
+  const match = source.match(new RegExp(`${attr}\\s*:\\s*(['"])(.*?)\\1|${attr}=(['"])(.*?)\\3`, 'i'));
+  return match?.[2] ?? match?.[4] ?? '';
+};
+
+const getCodeVariant = (source: string) => {
+  if (/\bprefer\b/i.test(source)) {
+    return 'prefer';
+  }
+
+  if (/\bavoid\b/i.test(source)) {
+    return 'avoid';
+  }
+
+  return '';
 };
 
 const contentDirectory = path.join(process.cwd(), 'app', 'content');
@@ -204,14 +218,20 @@ const highlightCode = (code: string, language: string) => {
   return highlighted.replace(/\n/g, '&#10;');
 };
 
-const renderCodeBlock = (code: string, language = '', header = '') => {
+const renderCodeBlock = (code: string, language = '', header = '', variant = '') => {
   const normalizedCode = normalizeCodeBody(code);
   const normalizedLanguage = normalizeLanguage(language);
-  const label = header || normalizedLanguage;
+  const normalizedVariant = variant === 'prefer' || variant === 'avoid' ? variant : '';
+  const label = normalizedVariant ? normalizedVariant.toUpperCase() : header || normalizedLanguage;
+  const classes = ['doc-code', normalizedVariant ? `doc-code-${normalizedVariant}` : ''].filter(Boolean).join(' ');
 
-  return `<figure class="doc-code" data-language="${escapeHtml(normalizedLanguage)}">${
+  return `<figure class="${classes}" data-language="${escapeHtml(normalizedLanguage)}"${
+    normalizedVariant ? ` data-code-variant="${normalizedVariant}"` : ''
+  }>${
     label
-      ? `<figcaption><span>${escapeHtml(label)}</span><button type="button" class="doc-code-copy">Copy</button></figcaption>`
+      ? `<figcaption><span class="doc-code-heading"><span class="doc-code-label">${escapeHtml(label)}</span>${
+          normalizedVariant && header ? `<span class="doc-code-title">${escapeHtml(header)}</span>` : ''
+        }</span><button type="button" class="doc-code-copy">Copy</button></figcaption>`
       : `<figcaption><span></span><button type="button" class="doc-code-copy">Copy</button></figcaption>`
   }<pre><code class="language-${escapeHtml(normalizedLanguage)}">${highlightCode(
     normalizedCode,
@@ -223,10 +243,128 @@ const renderDocsCode = (attrs: string, body: string, language: ContentLanguage) 
   const code = normalizeCodeBody(body) || getCodeFromPath(getAttr(attrs, 'path'), language);
   const header = getAttr(attrs, 'header');
 
-  return renderCodeBlock(code, inferLanguage(attrs), header);
+  return renderCodeBlock(code, inferLanguage(attrs), header, getCodeVariant(attrs));
 };
 
-const renderDocsCodeTabs = (body: string, language: ContentLanguage) => {
+const getFileKind = (header: string, language: string) => {
+  const normalizedLanguage = normalizeLanguage(language);
+  const normalizedHeader = header.toLowerCase();
+
+  if (['html', 'css', 'js', 'ts'].includes(normalizedLanguage)) {
+    return normalizedLanguage;
+  }
+
+  if (normalizedHeader.endsWith('.html')) {
+    return 'html';
+  }
+
+  if (normalizedHeader.endsWith('.css')) {
+    return 'css';
+  }
+
+  if (normalizedHeader.endsWith('.js')) {
+    return 'js';
+  }
+
+  if (normalizedHeader.endsWith('.ts')) {
+    return 'ts';
+  }
+
+  return normalizedLanguage;
+};
+
+const getPreviewHtml = (examples: { code: string; header: string; language: string; kind: string }[]) => {
+  const html = examples.find((example) => example.kind === 'html')?.code;
+
+  if (!html) {
+    return '';
+  }
+
+  const css = examples
+    .filter((example) => example.kind === 'css')
+    .map((example) => example.code)
+    .join('\n');
+  const js = examples
+    .filter((example) => example.kind === 'js')
+    .map((example) => example.code)
+    .join('\n');
+
+  const previewBody = sanitizeAngularTemplateForPreview(html);
+
+  return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html { color-scheme: light dark; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #fff;
+        color: #18181b;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 32px;
+      }
+      :root[data-theme='dark'] body {
+        background: #0f1014;
+        color: #f4f4f5;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      ${css}
+    </style>
+    <script>
+      addEventListener('message', (event) => {
+        if (event.data?.type === 'docs-theme') {
+          document.documentElement.dataset.theme = event.data.theme === 'dark' ? 'dark' : 'light';
+        }
+      });
+    <\/script>
+  </head>
+  <body>
+    ${previewBody}
+    ${js ? `<script>${js}<\/script>` : ''}
+  </body>
+</html>`;
+};
+
+const sanitizeAngularTemplateForPreview = (source: string) => {
+  const lines = source.replace(/\r\n/g, '\n').split('\n');
+  const output: string[] = [];
+  let skippedBlockDepth = 0;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    const opens = (line.match(/\{/g) ?? []).length;
+    const closes = (line.match(/\}/g) ?? []).length;
+
+    if (skippedBlockDepth > 0) {
+      skippedBlockDepth += opens - closes;
+      continue;
+    }
+
+    if (/^@(if|else|for|switch|case|default|defer|placeholder|loading|error|empty)\b/.test(trimmed)) {
+      skippedBlockDepth = Math.max(opens - closes, 0);
+      continue;
+    }
+
+    if (trimmed === '}') {
+      continue;
+    }
+
+    output.push(
+      line
+        .replace(/\s(?:\[|\(|\[\()[^\s=]+(?:\]|\)|\]\))="[^"]*"/g, '')
+        .replace(/\s\*[\w-]+="[^"]*"/g, '')
+        .replace(/\s#[\w-]+(?:="[^"]*")?/g, '')
+        .replace(/\{\{[^}]*\}\}/g, ''),
+    );
+  }
+
+  return output.join('\n');
+};
+
+const renderDocsCodeTabs = (attrs: string, body: string, language: ContentLanguage) => {
   const examples = [
     ...body.matchAll(/<docs-code([^>]*?)>([\s\S]*?)<\/docs-code>|<docs-code([^>]*?)\/>/g),
   ].map((match) => {
@@ -238,6 +376,8 @@ const renderDocsCodeTabs = (body: string, language: ContentLanguage) => {
       code,
       header,
       language: inferLanguage(attrs),
+      variant: getCodeVariant(attrs),
+      kind: getFileKind(header, inferLanguage(attrs)),
     };
   });
 
@@ -245,7 +385,19 @@ const renderDocsCodeTabs = (body: string, language: ContentLanguage) => {
     return '';
   }
 
-  return `<section class="doc-code-tabs">${examples
+  const previewHtml = getPreviewHtml(examples);
+  const hasPreview = Boolean(previewHtml) && (/\bpreview\b/i.test(attrs) || examples.length > 1);
+  const previewSrc = hasPreview ? `data:text/html;charset=utf-8,${encodeURIComponent(previewHtml)}` : '';
+
+  return `<section class="doc-code-tabs${hasPreview ? ' has-preview show-preview' : ''}"${
+    hasPreview ? ` data-code-view="preview"` : ''
+  }>${
+    hasPreview
+      ? `<div class="doc-code-preview-toolbar"><button type="button" class="doc-code-view-toggle" data-code-view-toggle><span class="doc-code-view-icon" aria-hidden="true">&lt;&gt;</span><span data-code-view-label>Show Code</span></button></div><iframe class="doc-code-preview" title="Code preview" sandbox="allow-scripts allow-forms" src="${escapeAttribute(
+          previewSrc,
+        )}"></iframe>`
+      : ''
+  }<div class="doc-code-tabs-code">${examples
     .map(
       (example, index) =>
         `<button type="button" class="doc-code-tab${
@@ -257,9 +409,9 @@ const renderDocsCodeTabs = (body: string, language: ContentLanguage) => {
       (example, index) =>
         `<div class="doc-code-tab-panel${
           index === 0 ? ' active' : ''
-        }" data-code-panel="${index}">${renderCodeBlock(example.code, example.language)}</div>`,
+        }" data-code-panel="${index}">${renderCodeBlock(example.code, example.language, '', example.variant)}</div>`,
     )
-    .join('')}</div></section>`;
+    .join('')}</div></div></section>`;
 };
 
 const renderInline = (value: string) => {
@@ -348,8 +500,8 @@ const renderCustomBlocks = (source: string, language: ContentLanguage) => {
   let output = source;
 
   output = output.replace(
-    /<docs-code-multifile[^>]*>([\s\S]*?)<\/docs-code-multifile>/g,
-    (_match, body: string) => renderDocsCodeTabs(body, language),
+    /<docs-code-multifile([^>]*)>([\s\S]*?)<\/docs-code-multifile>/g,
+    (_match, attrs: string, body: string) => renderDocsCodeTabs(attrs, body, language),
   );
 
   output = output.replace(
@@ -419,6 +571,7 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
   let orderedList: string[] = [];
   let inCode = false;
   let codeLanguage = '';
+  let codeAttrs = '';
   let code: string[] = [];
   const headingIds = new Map<string, number>();
 
@@ -445,18 +598,20 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
 
   for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
     const line = lines[lineIndex];
-    const codeFence = line.match(/^```([\w-]*)/);
+    const codeFence = line.match(/^```([^\s{]*)\s*(.*)$/);
     if (codeFence) {
       if (inCode) {
-        html.push(renderCodeBlock(code.join('\n'), codeLanguage));
+        html.push(renderCodeBlock(code.join('\n'), codeLanguage, getAttr(codeAttrs, 'header'), getCodeVariant(codeAttrs)));
         code = [];
         inCode = false;
         codeLanguage = '';
+        codeAttrs = '';
       } else {
         closeParagraph();
         closeList();
         inCode = true;
         codeLanguage = codeFence[1] ?? '';
+        codeAttrs = codeFence[2] ?? '';
       }
       continue;
     }
@@ -534,11 +689,15 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
       continue;
     }
 
-    const callout = line.match(/^(TIP|IMPORTANT|NOTE|WARNING|CRITICAL):\s+(.+)$/);
+    const callout = line.match(/^(TIP|IMPORTANT|NOTE|WARNING|CRITICAL|HELPFUL):\s+(.+)$/);
     if (callout) {
       closeParagraph();
       closeList();
-      html.push(`<aside class="doc-callout"><strong>${callout[1]}</strong><p>${renderInline(callout[2])}</p></aside>`);
+      const calloutType = callout[1].toLowerCase();
+
+      html.push(
+        `<aside class="doc-callout doc-callout-${calloutType}"><strong>${callout[1]}</strong><p>${renderInline(callout[2])}</p></aside>`,
+      );
       continue;
     }
 
