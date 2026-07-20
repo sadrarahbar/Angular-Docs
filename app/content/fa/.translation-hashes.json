@@ -1,6 +1,48 @@
 {
   "version": 1,
   "files": {
+    "ai\\agent-skills.md": {
+      "sourceHash": "acfe5984713a7b53dff8a6effed337942e27b82fe8f3c6ee90152b111abb9b68",
+      "targetHash": "25dc8ba7e4e253991f4464aef253fb03d4f4f0d9184c6a79fbca6ecddd2ba55a",
+      "translatedAt": "2026-07-20T16:28:22.936Z",
+      "model": "codex-manual"
+    },
+    "ai\\ai-tutor.md": {
+      "sourceHash": "e880a2ae1556fdf88f9c5dff94332969c6faf3ff3eb25c4c0e0c32f2cab4176f",
+      "targetHash": "ab92fe83d02351568c868ab198ae56ecbc9b8af734667a1580d5787e0eb62429",
+      "translatedAt": "2026-07-20T16:28:22.937Z",
+      "model": "codex-manual"
+    },
+    "ai\\design-patterns.md": {
+      "sourceHash": "820a277a06d3f3943388735b125b6ad956ece223c4dabedb7b4f5b7fd14b6e26",
+      "targetHash": "1d874b09c8a8dded219bbe6c6b0797e862f21d312db87d26251de6018d70fa9e",
+      "translatedAt": "2026-07-20T16:28:22.937Z",
+      "model": "codex-manual"
+    },
+    "ai\\develop-with-ai.md": {
+      "sourceHash": "c6135aa66ec47e546b2c7729af4706e2f9903dac7d51816506c69921b452d9a8",
+      "targetHash": "ae6dc4c34c4cee316c5b1fbdab72f1c3b3d7fa482580f876eb8cbbe690c15b22",
+      "translatedAt": "2026-07-20T16:28:22.936Z",
+      "model": "codex-manual"
+    },
+    "ai\\mcp-server-setup.md": {
+      "sourceHash": "184ad55af9b903f3f52c7ba0fed4b4f664e8a784d42a5c0a3b61ba93015be5c6",
+      "targetHash": "602b5b57636107ebf19c15ade524f3ae4549233863f6bef7b6e71a7102517a03",
+      "translatedAt": "2026-07-20T16:28:22.937Z",
+      "model": "codex-manual"
+    },
+    "ai\\overview.md": {
+      "sourceHash": "f11105344d696c2814df3e7de8292037b299d94d25f4f18f71aa9366dd63fb37",
+      "targetHash": "6ff776696d1a2dbc870f337f0f349815bc391f4dc3f6842ff4e095de402f9974",
+      "translatedAt": "2026-07-20T16:28:22.935Z",
+      "model": "codex-manual"
+    },
+    "ai\\webmcp.md": {
+      "sourceHash": "5a2f6a490b76fc2fecb6aec9d82542b628083e14e53c54047ece1e1da6ab7678",
+      "targetHash": "40240e8b76131b7038b41b547615f9d9224b86afdb42452503dbdc0222ecfb93",
+      "translatedAt": "2026-07-20T16:28:22.938Z",
+      "model": "codex-manual"
+    },
     "ecosystem\\rxjs-interop\\output-interop.md": {
       "sourceHash": "b570c5b6b4e87be053a1381e03b640c8852d98b2e2ed29a007371272c8e6e4e8",
       "targetHash": "0904259a4a7932998ddd9fa9a632b35e6a52b17bc51366d2b88c99482c0f8aad",
@@ -35,6 +77,96 @@
       "sourceHash": "fcc854b1aaae165b8a740e578dacccd44a5fe1091ad217538b2c0444a7ec4aaf",
       "targetHash": "bb17862d9c608037af9b2d74fdd8338e2e138d5b5a09ba77f283db0bd69e1b48",
       "translatedAt": "2026-07-19T09:05:05.526Z",
+      "model": "codex-manual"
+    },
+    "guide\\animations\\css.md": {
+      "sourceHash": "95878a2d2e83e3fa813b13c678078471cfd995f333217d9441efe45076e754d6",
+      "targetHash": "c333373958fc5e434fc0ccd6149b794b2e5aa3b9654d5ae36ffbd6f0f1210327",
+      "translatedAt": "2026-07-20T16:23:35.364Z",
+      "model": "codex-manual"
+    },
+    "guide\\animations\\enter-and-leave.md": {
+      "sourceHash": "551120e4342efbfbbcc18808fe8ac15dcdbec5328c611a9a8e38eeae38396ca4",
+      "targetHash": "425ada856b36642e1f4c9d380bbf05bb65506e4843da60fc8a5d6041aa2b33b1",
+      "translatedAt": "2026-07-20T16:23:35.363Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\accordion.md": {
+      "sourceHash": "750629a008536b22d8d3d6b7f252ebab202de79581f958a45f4a226f397a60f6",
+      "targetHash": "2d09774af166e1b11b1b27eb46d3cf802b38c83feb4e9ca48cd07cfe5864819e",
+      "translatedAt": "2026-07-20T16:05:29.331Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\autocomplete.md": {
+      "sourceHash": "c63e27c80bc46650d62e1d9c69c74a32b1c7cd88380838b38974f29d9647f6a2",
+      "targetHash": "772ce25287c0c7fd4cf80a0249c09f2a3882696dc8f7abc27abcc07cda9f47fe",
+      "translatedAt": "2026-07-20T16:05:29.332Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\combobox.md": {
+      "sourceHash": "d98df0bd062a4a2a1bace1f73d958f38b4dc794add7e031ca7a6efb0c2b35784",
+      "targetHash": "10dabccb0fe9386c3b803a60c2c78f2a55fce647806e845026cb2269f4b0ec9c",
+      "translatedAt": "2026-07-20T16:05:29.332Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\grid.md": {
+      "sourceHash": "1c1dfe56133d278a55881a62cd63a09db28524cefadcece68c16e9a6e72cd04e",
+      "targetHash": "d5cc9b337e60b37e2d919a14dcb353885170ca5d159e4e48620dda6b3467bbb3",
+      "translatedAt": "2026-07-20T16:07:31.625Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\listbox.md": {
+      "sourceHash": "e9f4a950a493ca5db9491c1845f90641996f3a5071a6e178c81bd24603dfe9d5",
+      "targetHash": "00cd22da543402e955289e2d4e298da051bebf840645a2370c7815b5b77f1182",
+      "translatedAt": "2026-07-20T16:07:31.626Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\menu.md": {
+      "sourceHash": "826838441c8c20d3f5f7b1bb401759ce75344a80bac40b34ffd1b94cbacb9b70",
+      "targetHash": "823a670e26391a5ff2209d34ef720e906e830a2d106ade729273465cd11352cc",
+      "translatedAt": "2026-07-20T16:07:31.627Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\menubar.md": {
+      "sourceHash": "ab750f94f52ffbbdde451f279b3070c66df5931aa6fedfbfed5fba021a6d5e22",
+      "targetHash": "421c18c50623c1da173e3d8cebafde10069b6e575d0c2117d9f22e7e4c655f21",
+      "translatedAt": "2026-07-20T16:09:46.088Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\multiselect.md": {
+      "sourceHash": "5874ef5666d6b750b4033b38cd88b27396a42f7d28f4a0687d442644a45f9174",
+      "targetHash": "273784c267ba52425f42598e94184c1b79c9db7543cb0742031e7dc05b9cbe72",
+      "translatedAt": "2026-07-20T16:09:46.089Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\overview.md": {
+      "sourceHash": "4129bdf16b45647433b2d4f327070b6b3b4552f49e2ca644826f28d80872ab1d",
+      "targetHash": "d835ce373f3eed53e85fcb538376d39eb6958c9f1a6aaefa074d6f28b3aa6fe6",
+      "translatedAt": "2026-07-20T16:05:29.330Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\select.md": {
+      "sourceHash": "fb7e1bec9cb56c7d76984cc941b13107fa3640b67f3fc338c696ddd68475943d",
+      "targetHash": "127ef61b9476be4a853d43ee7e5c74045e3441fb4980a6797f02f5847ea8bc9d",
+      "translatedAt": "2026-07-20T16:09:46.090Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\tabs.md": {
+      "sourceHash": "5b1562bd0134af9338b90665bd58d81cab613a97e9505fa199b69a0d28d06b0c",
+      "targetHash": "3d956baae07fc53cd444402eb5bd29243c8100bd6231828a29822d16d17f7a7b",
+      "translatedAt": "2026-07-20T16:12:13.509Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\toolbar.md": {
+      "sourceHash": "04a04c5194ce6a39d9fc11b9a4081c32245697e1ec863300fbe1955871e9a44c",
+      "targetHash": "a852e032ab2fdb65bc3d988b64188de63068232e982fa42f7db3fc6157383da3",
+      "translatedAt": "2026-07-20T16:12:13.510Z",
+      "model": "codex-manual"
+    },
+    "guide\\aria\\tree.md": {
+      "sourceHash": "c18079a2243f28e52c203649c4b6dfd1b9601d96eb052ec260798901f72f5620",
+      "targetHash": "e49b0b6f4666b797ebd0d5f12a6d92be832aef1817026f162a648072a708390d",
+      "translatedAt": "2026-07-20T16:12:13.511Z",
       "model": "codex-manual"
     },
     "guide\\components\\advanced-configuration.md": {
@@ -197,6 +329,12 @@
       "sourceHash": "0320b001da969871c78a24daa4322fd48a94e15bb302036ca62bffc95f5bcf34",
       "targetHash": "5c76667a0c00e2d8aa192f216518962b9145eecc73c09a025fb3a24fb00764f8",
       "translatedAt": "2026-07-19T09:58:59.415Z",
+      "model": "codex-manual"
+    },
+    "guide\\drag-drop.md": {
+      "sourceHash": "08dfac81437f00ede7be6e1143082c172d59e00dcb797e0805fdaf244b027018",
+      "targetHash": "412c1bdd5817172b0e7e93b3185398c7fa455d4761d45aedab6a4293c96288c4",
+      "translatedAt": "2026-07-20T16:23:35.364Z",
       "model": "codex-manual"
     },
     "guide\\elements.md": {
@@ -373,16 +511,94 @@
       "translatedAt": "2026-07-19T12:06:22.213Z",
       "model": "codex-manual"
     },
+    "guide\\hydration.md": {
+      "sourceHash": "bc561e2ebba2d3d6323c339bbeafd2fda06525c2e8f90abe220dbde76ca5fb0e",
+      "targetHash": "1da2235286cba0323aa2059d5c446c5e65a301b11b8f303d1d0ef889ffbad72c",
+      "translatedAt": "2026-07-20T15:35:55.585Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\add-package.md": {
+      "sourceHash": "4a8c73f27485219eb8e69df900e1c9463d34bd9bbd4736dc5c66af71f72b516c",
+      "targetHash": "74506a4f9151100d98c88e45517c8a0b10c807343124d7c6cca8fdd78ec32784",
+      "translatedAt": "2026-07-20T16:14:53.553Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\deploy.md": {
+      "sourceHash": "4e8b1e464ad84129bd3e2b3f4c9ee48cfb74af4851314e4a4e2c59b009bf075b",
+      "targetHash": "fea6fa6ab57d52dc2aa6fea6bbfe805e3a57bee657420da4bb9f97d40e212292",
+      "translatedAt": "2026-07-20T16:18:38.074Z",
+      "model": "codex-manual"
+    },
     "guide\\i18n\\example.md": {
       "sourceHash": "caeb411f78e9596a28cd7dcaf3f677a031cd025ee474a785cfb860aca72ada08",
       "targetHash": "5abb24f60de9145502a113697d6b8364b33c5a7ab947c3e38da9dc36b5d74693",
       "translatedAt": "2026-07-19T09:06:44.446Z",
       "model": "codex-manual"
     },
+    "guide\\i18n\\format-data-locale.md": {
+      "sourceHash": "f0c051aa2521668d17ed26406d6a31d28112041a4f0075b24c4182d35a8738d0",
+      "targetHash": "f373147d50df45c5ff9e0cf335a66b0efaa65fe20f6780ef36031faaaa1f040e",
+      "translatedAt": "2026-07-20T16:17:08.924Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\import-global-variants.md": {
+      "sourceHash": "1260f815fbed6e8a35d2a6e7fff58276c864340e226910c0ea0c7d79b119d3f3",
+      "targetHash": "d742b1963401363ddc37e9599f9e4e8dc7621e9888f5f6d5e27b6fd72c287fad",
+      "translatedAt": "2026-07-20T16:18:38.075Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\locale-id.md": {
+      "sourceHash": "39c13566c301b3b5776be6a64f564b12c2317eacf4b6dc1c2d5e256f2b9472ea",
+      "targetHash": "d35f57186fcaff6162c55753c5ea3e979cbfeafbb64c1d75fa8c83abb238cfbf",
+      "translatedAt": "2026-07-20T16:14:53.553Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\manage-marked-text.md": {
+      "sourceHash": "3f9f7e541fddd496c1d4008e5f2fc63b0557af04f603ea6cba095560955db642",
+      "targetHash": "985847331390db377cbe1a2414555d9b073e81d3e73bc968a64947c967be58ba",
+      "translatedAt": "2026-07-20T16:18:38.075Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\merge.md": {
+      "sourceHash": "7cca4c2d3988811e93049e97f1cdfc761b85e1b176ea4a9a5e78248b3073ce25",
+      "targetHash": "7e076ec9abe18c15d0ad99253c36d4c45ac40403b7d2cb0d013f55cbd65890f7",
+      "translatedAt": "2026-07-20T16:18:38.073Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\overview.md": {
+      "sourceHash": "32c5b41bbf12d155ca0a0ef0a2b1b094e8e411299d7a61436381fb1a92f065eb",
+      "targetHash": "b40917311c3fd0724f9df19c5618c9d5dc528c865cd460418d4251668625b88d",
+      "translatedAt": "2026-07-20T16:14:53.552Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\prepare.md": {
+      "sourceHash": "3492cf3b6a93a4fc99041ca8551fe2a789a5e7a0c512ca47aad024fd563fd32a",
+      "targetHash": "c6a66a916df3c9103c3553dd0e11c9ca39b9a06f3e245ce614d106e42d5ea5e0",
+      "translatedAt": "2026-07-20T16:17:08.925Z",
+      "model": "codex-manual"
+    },
+    "guide\\i18n\\translation-files.md": {
+      "sourceHash": "b57fb2198703612ebbc1eb812c83af1841549dbe4fecd1058e384bcd3f54be22",
+      "targetHash": "36360ecfce7f02056e1e7772c2d12ad29fc4e12db993a496ed1d1627ded7f464",
+      "translatedAt": "2026-07-20T16:17:08.926Z",
+      "model": "codex-manual"
+    },
     "guide\\image-optimization.md": {
       "sourceHash": "b87af5bc43a81bfbe82ebe764202131517fb22db3aa89e21c1c6d927564a92cc",
       "targetHash": "0f2e69891379bd6ad0e5bbaa3606ad4b43d7ef5055135b88a4719dc2a59f8aad",
       "translatedAt": "2026-07-19T09:58:59.417Z",
+      "model": "codex-manual"
+    },
+    "guide\\incremental-hydration.md": {
+      "sourceHash": "72d8bdf8ccfb637b8f439cd94e76595f1a7e30f7bc95edba62577777811e1fc5",
+      "targetHash": "54a59342f2748623dda5b798a9e80d3b69e06bb0cb3982dec09294632529970c",
+      "translatedAt": "2026-07-20T15:35:55.586Z",
+      "model": "codex-manual"
+    },
+    "guide\\performance\\overview.md": {
+      "sourceHash": "36a2b60f00a59a59c543b18ec8dd5f982b2b0f23de5f39a022f4caadd8560e96",
+      "targetHash": "f28170fefb7b647ccc9085c1d9234da3400ac08a0ebe480cb21aa931a4b2befe",
+      "translatedAt": "2026-07-20T15:33:39.279Z",
       "model": "codex-manual"
     },
     "guide\\routing\\common-router-tasks.md": {
@@ -517,6 +733,12 @@
       "translatedAt": "2026-07-19T09:20:03.198Z",
       "model": "codex-manual"
     },
+    "guide\\ssr.md": {
+      "sourceHash": "823ea52b95e9ce101c93af04fd2ebe514eb815257f69e6c37ed8d423c78a83c4",
+      "targetHash": "8dc96a9f56c859501356186762d3e72c5ac35f88865105569b85ce7a4768f145",
+      "translatedAt": "2026-07-20T15:33:39.280Z",
+      "model": "codex-manual"
+    },
     "guide\\templates\\binding.md": {
       "sourceHash": "d75942fc8c7501acc0799e28ffe03e32a297dd82c402b3766b089f00fbcd25fb",
       "targetHash": "efdd4f79ef4a6fe48af6b7059dec7e8ddc0153f3af8894abc0eaa2c1a704ddb6",
@@ -595,10 +817,100 @@
       "translatedAt": "2026-07-19T09:41:34.587Z",
       "model": "codex-manual"
     },
+    "guide\\testing\\attribute-directives.md": {
+      "sourceHash": "112f36b5ae90dceb68e70206aa2d76483f759dddbcea291c291c74155d73fe54",
+      "targetHash": "fb5e106b11a235982c9155efecda65df18e535ddbbce0a227a50ae71cf6286a9",
+      "translatedAt": "2026-07-20T15:41:35.299Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\code-coverage.md": {
+      "sourceHash": "ea97084cbad88e7ae45c7ced69b61933d3815ffe9fb9a56af4fb8d1797e28f4e",
+      "targetHash": "6220e416f5617c2e59eed2239748619463cc80efb4db71c0428038fec41ebcd7",
+      "translatedAt": "2026-07-20T15:41:35.301Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\component-harnesses-overview.md": {
+      "sourceHash": "155cf31a0438731e775acf0a15be63962e7367b9cbcae8da78fc09b11338b152",
+      "targetHash": "f2cc60edf09021d2884288ac0af614e9998e3b6dd8295b71d6f05b9776eeafda",
+      "translatedAt": "2026-07-20T15:43:12.300Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\component-harnesses-testing-environments.md": {
+      "sourceHash": "17bfbe9fd634aace806a30ae1af5f6c726e6552e8a0746a04c1c312e0df898fc",
+      "targetHash": "2ef9633ad600b82e16b55f385c429fc3de9197aa5803a72376f363319a690c94",
+      "translatedAt": "2026-07-20T15:46:02.295Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\components-basics.md": {
+      "sourceHash": "ac6d18f3526dfd4cd04562aca3bf06b65ec497cb19195177d98f994bf7249dab",
+      "targetHash": "2d8e4ea745197c55d7043dd257ed7ab5b0022d1b5ff22d2ba9e4200654cafb32",
+      "translatedAt": "2026-07-20T15:40:35.227Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\components-scenarios.md": {
+      "sourceHash": "9adeb473509af829fcc28e9468b25e38b1c8f1423b7713f28e2b9ff4386470b6",
+      "targetHash": "c4b3fd54b033a5135effd908e53851408b456abde475c5ac38e27335e4b9e6fc",
+      "translatedAt": "2026-07-20T15:51:05.743Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\creating-component-harnesses.md": {
+      "sourceHash": "56c327bad5700577e508734a7a54207495c454b22adf6e58579cedc71a9524e7",
+      "targetHash": "8dde86cbbcfd8be2da385dabd17e0c299404e2a485964cd8193bce8bb4ebfa9c",
+      "translatedAt": "2026-07-20T15:46:02.294Z",
+      "model": "codex-manual"
+    },
     "guide\\testing\\debugging.md": {
       "sourceHash": "c8bcba7ab627dbd929f5cdaf977594425c02350d762803c22e0416215456154b",
       "targetHash": "c7a0f4d53bb500448202ee091356f9fc68f56f518b0eb74a9cea73bc623e8d82",
       "translatedAt": "2026-07-19T09:06:44.447Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\karma.md": {
+      "sourceHash": "1b58b0a763994f02eb988e9a71f088df0d35969ce73cad6b327759210311ad0c",
+      "targetHash": "e38bd7f6650378db55e6fbb8bae4831cf3d9a62faa0c4c3e1e7dde3ae1d2bda2",
+      "translatedAt": "2026-07-20T15:47:44.343Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\migrating-to-vitest.md": {
+      "sourceHash": "725859307f82a3e617a645c7a620b8f3e63f47a79eba05dae9dd5bb9965ae231",
+      "targetHash": "98c2b27e87e9f7096fe8e7752112d95693b19299fd9df6f5abb6f8b2d673e80a",
+      "translatedAt": "2026-07-20T15:47:44.342Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\overview.md": {
+      "sourceHash": "79e7b484c4b966eb3eec1d776b64443fb37180d228d7ccbf3fcdf95cf129ea09",
+      "targetHash": "d7a7e2e97d9681f6a8f060da32bffa1518c5dec4877527f94a8a547eab8e6712",
+      "translatedAt": "2026-07-20T15:40:35.226Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\pipes.md": {
+      "sourceHash": "a8b9908f0907c7931a4d96359c8048787d2aa1bf449e14846e3fcf41e96d7c10",
+      "targetHash": "078891faa81bbba3ec1add53f20a4272754d34855cb345f7126cf0bdee2a5b06",
+      "translatedAt": "2026-07-20T15:41:35.300Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\services.md": {
+      "sourceHash": "519e956006662d0721f72032637ac8d53dbff39815bd84f9670f535ab9fe872f",
+      "targetHash": "397ec57ade62fae9405f943547f9bbc34a03ed5f75805ac13adb5f06d471f339",
+      "translatedAt": "2026-07-20T15:40:35.227Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\using-component-harnesses.md": {
+      "sourceHash": "a15a2b4c1342fd853ebc7a1a53093c73e61198f0d8816d1656d48201ae8087f1",
+      "targetHash": "d4b3cafe6e223c60a3cb64cfb05383565b2f5514bd06077fc07ce02b17f8beb0",
+      "translatedAt": "2026-07-20T15:46:02.293Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\utility-apis.md": {
+      "sourceHash": "037022c42c356eae96272e5ebcb9d6131ba004b4511195ed19877ad37901daf7",
+      "targetHash": "f67c06c8b983d9077466a7e8b7b41458dab6bca807a2925dc5d9a287081b0dfa",
+      "translatedAt": "2026-07-20T15:43:12.298Z",
+      "model": "codex-manual"
+    },
+    "guide\\testing\\zone-js-testing-utilities.md": {
+      "sourceHash": "8357f07d87ffbf8de7650f40f14a3e84ffe5da33e56a0c34cdb213460d7d5180",
+      "targetHash": "a89ac8938ad0913ce3499ef1d6e5f23d4cb37426eb7b998abe6a684d2cfa2c59",
+      "translatedAt": "2026-07-20T15:47:44.343Z",
       "model": "codex-manual"
     },
     "introduction\\essentials\\components.md": {
@@ -857,6 +1169,66 @@
       "sourceHash": "051c600010811dff3b45d2f86ec3543ba8335044b9548b5745d7e5f61a6ab316",
       "targetHash": "44a886baf7cb98b959b21af6b00d1dedf263191fff7ff3b1e5f0ccc0ead86ee8",
       "translatedAt": "2026-07-19T08:39:50.302Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\build-system-migration.md": {
+      "sourceHash": "ad0c4ba052439ac4a670e3a0e4f63e980fa313dccbea7a8f1dcb3d1bed43c81d",
+      "targetHash": "4649d5d97354216d0efec1315f2f629c4ff24074a27cbbf84ac93927dd8534a6",
+      "translatedAt": "2026-07-20T16:38:08.841Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\build.md": {
+      "sourceHash": "542621f71bb3f23214db39096d8018ab4bb6056ab388cbee8dc910667bd403f5",
+      "targetHash": "c3b5eb4e4796eaaf51f072c921ac555ddf216c4353dc78bc35e91b009a9ee05e",
+      "translatedAt": "2026-07-20T16:35:34.212Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\cli-builder.md": {
+      "sourceHash": "c79b78a78d02507e042809f578bb33ebbf58d16704f41005f1964407929f175c",
+      "targetHash": "3b10564b13655d7f7cf9f533e6010c9b672f6446f111a3e72aba81e624bb3116",
+      "translatedAt": "2026-07-20T16:39:37.254Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\deployment.md": {
+      "sourceHash": "10a9b1c52cdbade35fe5f8e452d298dfbff5e1b789afc1a095cfab3938ee74f6",
+      "targetHash": "b9d52c78187423a6f1435ab56b9f1f701ab8148e55f900b106cd1ba283429661",
+      "translatedAt": "2026-07-20T16:35:34.213Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\end-to-end.md": {
+      "sourceHash": "09404309bdedd2af8be990b7c997eb91beedf833d86c639f9bd910b3e884798b",
+      "targetHash": "f59d29bcc8a2fe37fec4be90b74df04df13df34ea34c6ab73c0afd1c130fe32c",
+      "translatedAt": "2026-07-20T16:30:07.095Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\environments.md": {
+      "sourceHash": "2d2fa16f1733ecd92713eae0b9c2575858848383bab4508a31d01b3b55720a1b",
+      "targetHash": "6fb6fdd08b039878e9639ca0c294981d0d01ce93483eed19d4208195199994da",
+      "translatedAt": "2026-07-20T16:35:34.214Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\overview.md": {
+      "sourceHash": "f59ccc1a5f2f82ca0d334f03bcd05235a7392cdcdf87a5a41afa476225d2c696",
+      "targetHash": "1eaa163a1e5c4b2bcf77426872a017640b9b350253f210a46e1cdf5fd27149a6",
+      "translatedAt": "2026-07-20T16:30:07.093Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\schematics.md": {
+      "sourceHash": "7f9c249ff3253b59deae94c34f021d4838ed29f83cc711cf6c136bb71ac1bf5f",
+      "targetHash": "bd850dc5c439b3091b9143085f1def9f8eff65dc4cac6c49cfda19c30904a676",
+      "translatedAt": "2026-07-20T16:40:33.685Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\serve.md": {
+      "sourceHash": "1c6c987ceb1ef4ce397dfbf813adcc8b9e30cc40054a66928ae5b6ba257e196e",
+      "targetHash": "1a47cb01e732abe5a5a21dbaa402f628826460f3b4ee47eed03165cc2870f3a3",
+      "translatedAt": "2026-07-20T16:30:07.094Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\setup-local.md": {
+      "sourceHash": "1b4300517b49f158eee8f2f2c688e4d6e1f4659e91eb2ecd91d98ffaf4b4209c",
+      "targetHash": "e85ec5a2f8f20a8fe7de690bcc86fdcfbd4663a859e2f9aed5fa94c7c164e187",
+      "translatedAt": "2026-07-20T16:30:07.094Z",
       "model": "codex-manual"
     },
     "tutorials\\deferrable-views\\intro\\README.md": {
