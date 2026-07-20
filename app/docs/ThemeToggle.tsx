@@ -8,7 +8,7 @@ const themeChangeEvent = 'docs-theme-change';
 
 const getPreferredTheme = (): Theme => {
   if (typeof window === 'undefined') {
-    return 'light';
+    return 'dark';
   }
 
   const savedTheme = window.localStorage.getItem('theme');
@@ -17,7 +17,7 @@ const getPreferredTheme = (): Theme => {
     return savedTheme;
   }
 
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return 'dark';
 };
 
 const applyTheme = (theme: Theme) => {
@@ -59,7 +59,7 @@ const subscribeToTheme = (callback: () => void) => {
 };
 
 export function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, () => 'light');
+  const theme = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, () => 'dark');
 
   const toggleTheme = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';

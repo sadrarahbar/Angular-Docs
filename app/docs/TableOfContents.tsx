@@ -25,26 +25,30 @@ export function TableOfContents({ headings, noHeadingsLabel }: TableOfContentsPr
       return;
     }
 
+    const scrollRoot = document.querySelector<HTMLElement>('.docs-content-layout');
+
     const updateActiveHeading = () => {
+      const rootTop = scrollRoot?.getBoundingClientRect().top ?? 0;
       const currentHeading =
-        [...headingElements].reverse().find((heading) => heading.getBoundingClientRect().top <= 120) ??
+        [...headingElements].reverse().find((heading) => heading.getBoundingClientRect().top <= rootTop + 80) ??
         headingElements[0];
 
       setActiveId(currentHeading.id);
     };
 
     const observer = new IntersectionObserver(updateActiveHeading, {
-      rootMargin: '-96px 0px -68% 0px',
+      root: scrollRoot,
+      rootMargin: '-80px 0px -68% 0px',
       threshold: [0, 1],
     });
 
     headingElements.forEach((heading) => observer.observe(heading));
     updateActiveHeading();
-    window.addEventListener('scroll', updateActiveHeading, { passive: true });
+    scrollRoot?.addEventListener('scroll', updateActiveHeading, { passive: true });
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', updateActiveHeading);
+      scrollRoot?.removeEventListener('scroll', updateActiveHeading);
     };
   }, [visibleHeadings]);
 
@@ -53,7 +57,7 @@ export function TableOfContents({ headings, noHeadingsLabel }: TableOfContentsPr
   }
 
   return (
-    <nav>
+    <nav className="toc-table">
       {visibleHeadings.map((heading) => (
         <a
           key={heading.id}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -23,11 +24,27 @@ const themeScript = `
     const savedTheme = localStorage.getItem('theme');
     const theme = savedTheme === 'light' || savedTheme === 'dark'
       ? savedTheme
-      : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      : 'dark';
+    localStorage.setItem('theme', theme);
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+
+    const params = new URLSearchParams(location.search);
+    const urlLanguage = params.get('lang');
+    const savedLanguage = localStorage.getItem('language');
+    const language = urlLanguage === 'fa' || urlLanguage === 'en'
+      ? urlLanguage
+      : (savedLanguage === 'fa' || savedLanguage === 'en' ? savedLanguage : 'en');
+    localStorage.setItem('language', language);
+
+    if (!urlLanguage && language === 'fa') {
+      params.set('lang', 'fa');
+      const query = params.toString();
+      location.replace(location.pathname + (query ? '?' + query : '') + location.hash);
+    }
   } catch {
-    document.documentElement.dataset.theme = 'light';
+    document.documentElement.dataset.theme = 'dark';
+    document.documentElement.style.colorScheme = 'dark';
   }
 })();
 `;
@@ -44,7 +61,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <Script id="theme-script" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeScript }} />
         {children}
       </body>
     </html>

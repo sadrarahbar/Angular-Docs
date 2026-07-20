@@ -23,6 +23,7 @@ type DocsSidebarProps = {
 
 export function DocsSidebar({ section, items, activeHref, language, primaryNavigation }: DocsSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const sidebarTitle = language === 'fa' ? `${translateUi('menu', language)} ${section}` : `${section} ${translateUi('menu', language)}`;
 
   return (
     <>
@@ -53,7 +54,7 @@ export function DocsSidebar({ section, items, activeHref, language, primaryNavig
                 className={[
                   'px-2.5 py-3 text-sm font-semibold hover:!text-[var(--accent)]',
                   section.isActive
-                    ? 'border-b-[3px] border-b-red-800 !text-[var(--foreground)]'
+                    ? 'border-b-[3px] border-b-[var(--accent)] !text-[var(--accent)]'
                     : '!text-[var(--muted)]',
                 ].join(' ')}
               >
@@ -72,11 +73,11 @@ export function DocsSidebar({ section, items, activeHref, language, primaryNavig
 
       <aside
         id="docs-sidebar"
-        className={['sidebar h-full flex flex-col gap-5', isOpen ? 'open' : ''].join(' ')}
+        className={['sidebar h-full flex flex-col gap-2', isOpen ? 'open' : ''].join(' ')}
         aria-label={`${section} navigation`}
       >
         <div className="sidebar-header">
-          <div className="sidebar-title">{section}</div>
+          <div className="sidebar-title">{sidebarTitle}</div>
           <button
             type="button"
             className="sidebar-close"

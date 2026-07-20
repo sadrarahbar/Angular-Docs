@@ -276,6 +276,74 @@ const renderInline = (value: string) => {
   return output;
 };
 
+const splitMarkdownTableRow = (line: string) => {
+  const trimmed = line.trim();
+
+  if (!trimmed.includes('|')) {
+    return null;
+  }
+
+  const source = trimmed.replace(/^\|/, '').replace(/\|$/, '');
+  const cells: string[] = [];
+  let cell = '';
+  let inCode = false;
+  let escaped = false;
+
+  for (const character of source) {
+    if (escaped) {
+      cell += character;
+      escaped = false;
+      continue;
+    }
+
+    if (character === '\\') {
+      cell += character;
+      escaped = true;
+      continue;
+    }
+
+    if (character === '`') {
+      inCode = !inCode;
+      cell += character;
+      continue;
+    }
+
+    if (character === '|' && !inCode) {
+      cells.push(cell.trim());
+      cell = '';
+      continue;
+    }
+
+    cell += character;
+  }
+
+  cells.push(cell.trim());
+  return cells.length > 1 ? cells : null;
+};
+
+const isMarkdownTableSeparator = (line: string) => {
+  const cells = splitMarkdownTableRow(line);
+
+  return Boolean(cells?.length && cells.every((cell) => /^:?-{3,}:?$/.test(cell.replace(/\s+/g, ''))));
+};
+
+const renderMarkdownTable = (header: string[], rows: string[][]) => {
+  const columnCount = header.length;
+  const normalizeCells = (cells: string[]) =>
+    Array.from({ length: columnCount }, (_value, index) => cells[index] ?? '');
+
+  return `<div class="doc-table"><table><thead><tr>${normalizeCells(header)
+    .map((cell) => `<th>${renderInline(cell)}</th>`)
+    .join('')}</tr></thead><tbody>${rows
+    .map(
+      (row) =>
+        `<tr>${normalizeCells(row)
+          .map((cell) => `<td>${renderInline(cell)}</td>`)
+          .join('')}</tr>`,
+    )
+    .join('')}</tbody></table></div>`;
+};
+
 const renderCustomBlocks = (source: string, language: ContentLanguage) => {
   let output = source;
 
@@ -375,7 +443,8 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
     }
   };
 
-  for (const line of lines) {
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    const line = lines[lineIndex];
     const codeFence = line.match(/^```([\w-]*)/);
     if (codeFence) {
       if (inCode) {
@@ -424,6 +493,30 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
         headings.push({ id, text, level });
       }
       html.push(`<h${level} id="${id}">${renderInline(heading[2])}</h${level}>`);
+      continue;
+    }
+
+    const tableHeader = splitMarkdownTableRow(line);
+    const nextLine = lines[lineIndex + 1] ?? '';
+    if (tableHeader && isMarkdownTableSeparator(nextLine)) {
+      const rows: string[][] = [];
+
+      closeParagraph();
+      closeList();
+      lineIndex += 1;
+
+      while (lineIndex + 1 < lines.length) {
+        const row = splitMarkdownTableRow(lines[lineIndex + 1]);
+
+        if (!row || isMarkdownTableSeparator(lines[lineIndex + 1])) {
+          break;
+        }
+
+        rows.push(row);
+        lineIndex += 1;
+      }
+
+      html.push(renderMarkdownTable(tableHeader, rows));
       continue;
     }
 

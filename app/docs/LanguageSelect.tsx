@@ -15,6 +15,8 @@ export function LanguageSelect({ language }: LanguageSelectProps) {
   const changeLanguage = (nextLanguage: Language) => {
     const params = new URLSearchParams(searchParams.toString());
 
+    window.localStorage.setItem('language', nextLanguage);
+
     if (nextLanguage === 'en') {
       params.delete('lang');
     } else {
