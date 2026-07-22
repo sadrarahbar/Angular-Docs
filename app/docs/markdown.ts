@@ -476,11 +476,17 @@ const renderDocsCodeTabs = (attrs: string, body: string, language: ContentLangua
 
 const renderInline = (value: string): string => {
   const anchors: { attrs: string; body: string }[] = [];
+  const htmlTables: string[] = [];
   const markdownImages: { alt: string; src: string; title: string }[] = [];
   const markdownLinks: { label: string; href: string }[] = [];
   let source = value.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (_match, attrs: string, body: string) => {
     const index = anchors.push({ attrs, body }) - 1;
     return `@@DOCSANCHOR${index}@@`;
+  });
+
+  source = source.replace(/<table\b[^>]*>[\s\S]*?<\/table>/gi, (table: string) => {
+    const index = htmlTables.push(table) - 1;
+    return `@@DOCSTABLE${index}@@`;
   });
 
   source = source.replace(
@@ -503,6 +509,7 @@ const renderInline = (value: string): string => {
   output = output.replace(/`([^`]+)`/g, '<code>$1</code>');
   output = output.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   output = output.replace(/_([^_]+)_/g, '<em>$1</em>');
+  output = output.replace(/@@DOCSTABLE(\d+)@@/g, (_match, rawIndex: string) => htmlTables[Number(rawIndex)] ?? '');
   output = output.replace(/@@DOCSIMAGE(\d+)@@/g, (_match, rawIndex: string) => {
     const image = markdownImages[Number(rawIndex)];
 

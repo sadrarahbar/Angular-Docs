@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { DocEntry, Language } from './data';
 import type { RenderedMarkdown } from './markdown';
 import { CodeInteractions } from './CodeInteractions';
+import { BackToTop } from './BackToTop';
 import { TableOfContents } from './TableOfContents';
 import { translateUi } from './i18n';
 
@@ -47,6 +48,7 @@ export function DocsContentArea({
 
   return (
     <div className="docs-content-layout">
+      <BackToTop />
       <main className="content-shell">
         <CodeInteractions />
         {breadcrumbItems.length ? (

@@ -36,7 +36,7 @@ export function LanguageSelect({ language }: LanguageSelectProps) {
       aria-label={`Switch language to ${nextLanguage === 'fa' ? 'Persian' : 'English'}`}
       onClick={() => changeLanguage(nextLanguage)}
     >
-      <span aria-hidden="true">{language === 'fa' ? 'فا' : 'EN'}</span>
+      <span aria-hidden="true">{nextLanguage === 'fa' ? 'فا' : 'EN'}</span>
     </button>
   );
 }
