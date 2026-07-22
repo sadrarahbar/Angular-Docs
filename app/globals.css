@@ -27,7 +27,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter-tight), var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -43,7 +43,7 @@ body {
   min-width: 320px;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter-tight), var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -603,15 +603,15 @@ a {
 }
 
 .doc-content h2 {
-  font-size: 26px;
+  font-size: 32px;
 }
 
 .doc-content h3 {
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .doc-content h4 {
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .doc-content h5 {
@@ -1389,7 +1389,7 @@ a {
 }
 
 .docs-app.rtl {
-  font-family: "IRANSans", var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family:  "IRANSans",var(--font-inter-tight), var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
 .docs-app.rtl .sidebar,
