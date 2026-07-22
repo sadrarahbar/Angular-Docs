@@ -738,6 +738,7 @@ a {
 
 .doc-table,
 .docs-table {
+  direction: ltr;
   overflow-x: auto;
   margin: 28px 0;
   scrollbar-width: thin;
@@ -746,6 +747,7 @@ a {
 .doc-table table,
 .docs-table table,
 .doc-content table {
+  direction: ltr;
   width: 100%;
   min-width: 640px;
   border-collapse: collapse;
@@ -792,7 +794,7 @@ a {
 .docs-app.rtl .docs-table td,
 .docs-app.rtl .doc-content table th,
 .docs-app.rtl .doc-content table td {
-  text-align: right;
+  text-align: left;
 }
 
 .doc-code,
