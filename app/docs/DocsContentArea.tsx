@@ -36,7 +36,11 @@ export function DocsContentArea({ breadcrumbItems, rendered, previousDoc, nextDo
         {breadcrumbItems.length ? (
           <nav className="doc-breadcrumb" aria-label="Breadcrumb">
             {breadcrumbItems.map((item, index) => (
-              <span key={`${item.label}-${index}`} className="doc-breadcrumb-item">
+              <span
+                key={`${item.label}-${index}`}
+                className="doc-breadcrumb-item"
+                aria-current={index === breadcrumbItems.length - 1 ? 'page' : undefined}
+              >
                 {item.href ? <Link href={getLocalizedHref(item.href, language)}>{item.label}</Link> : <span>{item.label}</span>}
                 {index < breadcrumbItems.length - 1 ? (
                   <svg viewBox="0 0 20 20" aria-hidden="true">

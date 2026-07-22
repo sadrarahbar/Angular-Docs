@@ -183,12 +183,41 @@ const highlightScript = (code: string) =>
     { regex: /"(?:\\.|[^"\\])*"/gy, className: 'string' },
     { regex: /'(?:\\.|[^'\\])*'/gy, className: 'string' },
     { regex: /@[A-Za-z_]\w*/gy, className: 'decorator' },
+    { regex: /\b(?:true|false|null|undefined|NaN|Infinity)\b/gy, className: 'boolean' },
+    { regex: /\bthis\b/gy, className: 'this' },
     {
       regex:
-        /\b(import|from|export|default|const|let|var|return|if|else|for|while|switch|case|break|continue|class|extends|new|function|async|await|type|interface|implements|public|private|protected|readonly|static|constructor|this|true|false|null|undefined)\b/gy,
+        /\b(import|from|export|default|const|let|var|return|if|else|for|of|in|while|do|switch|case|break|continue|throw|try|catch|finally|class|extends|new|function|async|await|yield|type|interface|enum|namespace|implements|declare|abstract|public|private|protected|readonly|static|constructor|super|typeof|instanceof|keyof|as|satisfies|void|never|unknown|any|string|number|boolean)\b/gy,
       className: 'keyword',
     },
+    { regex: /\b[A-Z][A-Za-z0-9_$]*\b/gy, className: 'type' },
+    { regex: /\b[A-Za-z_$][\w$]*(?=\s*\()/gy, className: 'function' },
+    { regex: /(?<=\.)[A-Za-z_$][\w$]*/gy, className: 'property' },
+    { regex: /\b[A-Za-z_$][\w$]*(?=\s*:)/gy, className: 'property' },
+    { regex: /\b[A-Za-z_$][\w$]*(?=\s*=)/gy, className: 'variable' },
+    { regex: /===|!==|=>|==|!=|<=|>=|\?\?|\?\.|&&|\|\||\+\+|--|\*\*|[+\-*/%=&|!<>?:]/gy, className: 'operator' },
     { regex: /\b\d+(?:\.\d+)?\b/gy, className: 'number' },
+  ]);
+
+const highlightJson = (code: string) =>
+  tokenize(code, [
+    { regex: /"(?:\\.|[^"\\])*"(?=\s*:)/gy, className: 'property' },
+    { regex: /"(?:\\.|[^"\\])*"/gy, className: 'string' },
+    { regex: /\b(?:true|false|null)\b/gy, className: 'boolean' },
+    { regex: /-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/gyi, className: 'number' },
+    { regex: /:/gy, className: 'operator' },
+  ]);
+
+const highlightStylesheet = (code: string) =>
+  tokenize(code, [
+    { regex: /\/\*[\s\S]*?\*\//gy, className: 'comment' },
+    { regex: /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/gy, className: 'string' },
+    { regex: /@[\w-]+/gy, className: 'keyword' },
+    { regex: /--[\w-]+|[\w-]+(?=\s*:)/gy, className: 'property' },
+    { regex: /#[\da-f]{3,8}\b/gyi, className: 'number' },
+    { regex: /-?\b\d+(?:\.\d+)?(?:px|rem|em|%|vh|vw|s|ms|deg)?\b/gyi, className: 'number' },
+    { regex: /[.#]?[A-Za-z_-][\w-]*(?=\s*[{,])/gy, className: 'selector' },
+    { regex: /[>:~+]/gy, className: 'operator' },
   ]);
 
 const highlightShell = (code: string) =>
@@ -207,8 +236,12 @@ const highlightCode = (code: string, language: string) => {
 
   if (['html', 'xml'].includes(normalizedLanguage)) {
     highlighted = highlightMarkup(code);
-  } else if (['ts', 'js', 'json', 'css'].includes(normalizedLanguage)) {
+  } else if (['ts', 'js'].includes(normalizedLanguage)) {
     highlighted = highlightScript(code);
+  } else if (normalizedLanguage === 'json') {
+    highlighted = highlightJson(code);
+  } else if (normalizedLanguage === 'css') {
+    highlighted = highlightStylesheet(code);
   } else if (normalizedLanguage === 'shell') {
     highlighted = highlightShell(code);
   } else {
@@ -397,14 +430,14 @@ const renderDocsCodeTabs = (attrs: string, body: string, language: ContentLangua
           previewSrc,
         )}"></iframe>`
       : ''
-  }<div class="doc-code-tabs-code">${examples
+  }<div class="doc-code-tabs-code"><div class="doc-code-tab-navigation"><button type="button" class="doc-code-tab-arrow previous" data-code-tab-nav="previous" aria-label="Previous code tab"><span aria-hidden="true">‹</span></button><div class="doc-code-tab-list" role="tablist">${examples
     .map(
       (example, index) =>
         `<button type="button" class="doc-code-tab${
           index === 0 ? ' active' : ''
-        }" data-code-tab="${index}" aria-selected="${index === 0}">${escapeHtml(example.header)}</button>`,
+        }" data-code-tab="${index}" role="tab" aria-selected="${index === 0}">${escapeHtml(example.header)}</button>`,
     )
-    .join('')}<div class="doc-code-tab-panels">${examples
+    .join('')}</div><button type="button" class="doc-code-tab-arrow next" data-code-tab-nav="next" aria-label="Next code tab"><span aria-hidden="true">›</span></button></div><div class="doc-code-tab-panels">${examples
     .map(
       (example, index) =>
         `<div class="doc-code-tab-panel${
@@ -417,6 +450,8 @@ const renderDocsCodeTabs = (attrs: string, body: string, language: ContentLangua
 const renderInline = (value: string) => {
   let output = escapeHtml(value);
 
+  // Preserve explicit Markdown line breaks without allowing arbitrary inline HTML.
+  output = output.replace(/&lt;br\s*\/?&gt;/gi, '<br>');
   output = output.replace(/`([^`]+)`/g, '<code>$1</code>');
   output = output.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   output = output.replace(/_([^_]+)_/g, '<em>$1</em>');
@@ -498,6 +533,17 @@ const renderMarkdownTable = (header: string[], rows: string[][]) => {
 
 const renderCustomBlocks = (source: string, language: ContentLanguage) => {
   let output = source;
+
+  output = output.replace(/<docs-callout([^>]*)>/g, (_match, attrs: string) => {
+    const title = getAttr(attrs, 'title') || getAttr(attrs, 'header');
+    const type = attrs.match(/\b(critical|important|helpful|warning|note|tip)\b/i)?.[1].toLowerCase() ?? 'helpful';
+
+    return `<aside class="doc-callout docs-callout-block doc-callout-${type}">${
+      title ? `<strong>${renderInline(title)}</strong>` : ''
+    }`;
+  });
+
+  output = output.replace(/<\/docs-callout>/g, '</aside>');
 
   output = output.replace(
     /<docs-code-multifile([^>]*)>([\s\S]*?)<\/docs-code-multifile>/g,
@@ -696,7 +742,7 @@ export function renderMarkdown(markdown: string, language: ContentLanguage = def
       const calloutType = callout[1].toLowerCase();
 
       html.push(
-        `<aside class="doc-callout doc-callout-${calloutType}"><strong>${callout[1]}</strong><p>${renderInline(callout[2])}</p></aside>`,
+        `<aside class="doc-callout doc-callout-${calloutType}"><strong>${callout[1]}:</strong><p>${renderInline(callout[2])}</p></aside>`,
       );
       continue;
     }

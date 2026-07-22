@@ -15,12 +15,11 @@ export function CodeInteractions() {
     const onClick = async (event: MouseEvent) => {
       const target = event.target;
 
-      if (!(target instanceof HTMLElement)) {
+      if (!(target instanceof Element)) {
         return;
       }
 
-      const tab = target.closest<HTMLButtonElement>('[data-code-tab]');
-      if (tab) {
+      const activateCodeTab = (tab: HTMLButtonElement) => {
         const tabs = tab.closest<HTMLElement>('.doc-code-tabs');
         const tabIndex = tab.dataset.codeTab;
 
@@ -34,6 +33,32 @@ export function CodeInteractions() {
           panel.classList.toggle('active', panel.dataset.codePanel === tabIndex);
         });
 
+        if (window.matchMedia('(max-width: 820px)').matches) {
+          const tabList = tab.closest<HTMLElement>('.doc-code-tab-list');
+          const tabPosition = tab.offsetLeft - (tabList?.offsetLeft ?? 0);
+          tabList?.scrollTo({ left: tabPosition, behavior: 'smooth' });
+        }
+      };
+
+      const tabNavigation = target.closest<HTMLButtonElement>('[data-code-tab-nav]');
+      if (tabNavigation) {
+        const tabs = tabNavigation.closest<HTMLElement>('.doc-code-tabs');
+        const tabButtons = Array.from(tabs?.querySelectorAll<HTMLButtonElement>('[data-code-tab]') ?? []);
+        const activeIndex = tabButtons.findIndex((button) => button.classList.contains('active'));
+        const direction = tabNavigation.dataset.codeTabNav === 'next' ? 1 : -1;
+        const nextIndex = (activeIndex + direction + tabButtons.length) % tabButtons.length;
+
+        const nextTab = tabButtons[nextIndex];
+
+        if (nextTab) {
+          activateCodeTab(nextTab);
+        }
+        return;
+      }
+
+      const tab = target.closest<HTMLButtonElement>('[data-code-tab]');
+      if (tab) {
+        activateCodeTab(tab);
         return;
       }
 

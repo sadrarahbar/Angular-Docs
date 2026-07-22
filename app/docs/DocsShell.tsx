@@ -48,7 +48,7 @@ const getBreadcrumbItems = (
     const breadcrumbItem = { label: item.label, href };
 
     if (href === activeHref) {
-      return ancestors;
+      return [...ancestors, { label: item.label }];
     }
 
     if (item.children?.length) {
