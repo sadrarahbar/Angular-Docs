@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { allDocs, getDocNeighbors, isRtlLanguage, navigationSections, type DocEntry, type Language } from './data';
+import { allDocs, getDocNeighbors, getRenderedDoc, isRtlLanguage, navigationSections, type DocEntry, type Language } from './data';
 import type { NavigationItem } from '../routes';
 import type { RenderedMarkdown } from './markdown';
 import { DocsContentArea } from './DocsContentArea';
@@ -68,6 +68,9 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
   const sectionItems = navigationSections.find((section) => section.label === doc.section)?.items ?? [];
   const localizedSectionItems = localizeNavigationItems(sectionItems, language);
   const breadcrumbItems = getBreadcrumbItems(localizedSectionItems, doc.href);
+  const currentDoc = localizeDocEntry(doc, language) ?? doc;
+  const canonicalRendered = language === 'en' ? rendered : getRenderedDoc(doc, 'en');
+  const useFallbackHero = !canonicalRendered?.html.includes('<h1');
   const previousDoc = localizeDocEntry(neighbors.previous, language);
   const nextDoc = localizeDocEntry(neighbors.next, language);
   const primaryNavigation = navigationSections.slice(0, 3).map((section) => ({
@@ -132,6 +135,8 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
 
         <DocsContentArea
           breadcrumbItems={breadcrumbItems}
+          docTitle={currentDoc.label}
+          forceFallbackHero={useFallbackHero}
           rendered={rendered}
           previousDoc={previousDoc}
           nextDoc={nextDoc}

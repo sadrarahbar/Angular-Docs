@@ -634,6 +634,14 @@ a {
   overflow-x: auto;
 }
 
+.doc-content img {
+  border-radius: 8px;
+  display: block;
+  height: auto;
+  margin: 20px auto;
+  max-width: 100%;
+}
+
 .doc-content ul,
 .doc-content ol {
   display: grid;
@@ -1749,7 +1757,7 @@ a {
 }
 
 :root[data-theme="dark"] .doc-hero h1{
-  color:var(--accent)
+  color: #fb4d76;
 }
 
 

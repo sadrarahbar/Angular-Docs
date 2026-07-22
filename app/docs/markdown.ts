@@ -476,11 +476,20 @@ const renderDocsCodeTabs = (attrs: string, body: string, language: ContentLangua
 
 const renderInline = (value: string): string => {
   const anchors: { attrs: string; body: string }[] = [];
+  const markdownImages: { alt: string; src: string; title: string }[] = [];
   const markdownLinks: { label: string; href: string }[] = [];
   let source = value.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (_match, attrs: string, body: string) => {
     const index = anchors.push({ attrs, body }) - 1;
     return `@@DOCSANCHOR${index}@@`;
   });
+
+  source = source.replace(
+    /!\[([^\]]*)\]\(\s*(?:<([^>]+)>|([^\s)]+))(?:\s+(['"])(.*?)\4)?\s*\)/g,
+    (_match, alt: string, wrappedSrc: string, plainSrc: string, _quote: string, title: string) => {
+      const index = markdownImages.push({ alt, src: wrappedSrc || plainSrc, title: title || '' }) - 1;
+      return `@@DOCSIMAGE${index}@@`;
+    },
+  );
 
   source = source.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label: string, href: string) => {
     const index = markdownLinks.push({ label, href }) - 1;
@@ -494,6 +503,18 @@ const renderInline = (value: string): string => {
   output = output.replace(/`([^`]+)`/g, '<code>$1</code>');
   output = output.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   output = output.replace(/_([^_]+)_/g, '<em>$1</em>');
+  output = output.replace(/@@DOCSIMAGE(\d+)@@/g, (_match, rawIndex: string) => {
+    const image = markdownImages[Number(rawIndex)];
+
+    if (!image) {
+      return '';
+    }
+
+    const src = /^(?:https?:|\/)/i.test(image.src) ? image.src : `/${image.src}`;
+    const title = image.title ? ` title="${escapeAttribute(image.title)}"` : '';
+
+    return `<img src="${escapeAttribute(src)}" alt="${escapeAttribute(image.alt)}"${title} loading="lazy">`;
+  });
   output = output.replace(/@@DOCSLINK(\d+)@@/g, (_match, rawIndex: string) => {
     const link = markdownLinks[Number(rawIndex)];
 

@@ -12,6 +12,8 @@ type BreadcrumbItem = {
 
 type DocsContentAreaProps = {
   breadcrumbItems: BreadcrumbItem[];
+  docTitle: string;
+  forceFallbackHero: boolean;
   rendered: RenderedMarkdown;
   previousDoc?: DocEntry;
   nextDoc?: DocEntry;
@@ -28,7 +30,21 @@ const getLocalizedHref = (href: string, language: Language) => {
   return `${href}?lang=${language}`;
 };
 
-export function DocsContentArea({ breadcrumbItems, rendered, previousDoc, nextDoc, language }: DocsContentAreaProps) {
+export function DocsContentArea({
+  breadcrumbItems,
+  docTitle,
+  forceFallbackHero,
+  rendered,
+  previousDoc,
+  nextDoc,
+  language,
+}: DocsContentAreaProps) {
+  const hasPageTitle = /<h1(?:\s|>)/i.test(rendered.html);
+  const showFallbackHero = forceFallbackHero || !hasPageTitle;
+  const contentHtml = forceFallbackHero
+    ? rendered.html.replace(/^\s*<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, '')
+    : rendered.html;
+
   return (
     <div className="docs-content-layout">
       <main className="content-shell">
@@ -51,7 +67,16 @@ export function DocsContentArea({ breadcrumbItems, rendered, previousDoc, nextDo
             ))}
           </nav>
         ) : null}
-        <article className="doc-content" dangerouslySetInnerHTML={{ __html: rendered.html }} />
+        {!showFallbackHero ? (
+          <article className="doc-content" dangerouslySetInnerHTML={{ __html: rendered.html }} />
+        ) : (
+          <article className="doc-content">
+            <section className="doc-hero">
+              <h1>{docTitle}</h1>
+            </section>
+            <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          </article>
+        )}
 
         <footer className="doc-pagination" aria-label="Document pagination">
           {previousDoc ? (
