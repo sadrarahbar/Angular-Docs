@@ -1,6 +1,24 @@
 {
   "version": 1,
   "files": {
+    "best-practices\\error-handling.md": {"sourceHash":"c4d7c7dd60e5f814d73bd651eea264d50b0f5659e59db85547216ec5ed48878f","targetHash":"0e61c713c57aa58a2b7c2a0ff5701be13b78539bbc414a0e166a4e2c637bfcf3","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "best-practices\\performance\\overview.md": {"sourceHash":"4d4f6551531f83016e7dd09466fda70af780a35c67bce719b15a5f8731df7229","targetHash":"abde162a0692a56af8073849a60ee8a810bd657bc65a1b1510407c5122f4cf08","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "best-practices\\runtime-performance\\overview.md": {"sourceHash":"0ee87f826732d2823cae5aeaaa34f21202037ca74c7c57c408186428c792aa6d","targetHash":"2fe8958fcde0083d83910749583af5034d42ee82a51a9de5c6142e6f42db70e1","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "best-practices\\runtime-performance\\profiling-with-chrome-devtools.md": {"sourceHash":"005e49dc33617bda621a91891018f3836448b5a10ec360a5755b121f2f5a0bac","targetHash":"e4ca2a19a5de2b551868813626625c1261ab036dbe64d9509cb1f03d7a2bb4c3","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "best-practices\\runtime-performance\\skipping-subtrees.md": {"sourceHash":"5f5b7da1bd0e235bcc9b8e3219e60596b6248a4f188f83218a0c8b7f5398a9bf","targetHash":"567a69f64b0ae7f903a9b715bacb0e5455e3a6bf2f3929279266c786a931d345","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "best-practices\\runtime-performance\\slow-computations.md": {"sourceHash":"1d26e55d3d3a1d79bb69da4c829053c37ad48087c0fafcac4ea5bdf38ffebf38","targetHash":"be1c65322f08712f66107d32f15c72e96ce690acf3847ee2eaa8f7aca3f5ec32","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "best-practices\\runtime-performance\\zone-pollution.md": {"sourceHash":"505609bc0bb0f5e5e4a358a36f29fb6ebeb7b3aabbfdef3dcce5cea3372a1a41","targetHash":"60dd1aa14e14c1e6088d4279f540baa8184b83ba7984a3b2c6f92fe3c380cbdb","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "best-practices\\update.md": {"sourceHash":"bdab70fe99a3f261f59f1b023d2d752c717aa49a385c51a15a8efe311eb37ed9","targetHash":"6832bacc1399f1594e9a3832e3a4a4c4814c57812c35d31fe58807c988640aba","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "events\\v21.md": {"sourceHash":"8bfc0d99730727a3dda7dc7d067cee61baa43c33c7225bb139c9708629cd93af","targetHash":"d4eb713474af3afae9d9e77967355ef2f8480fe881d325fa8086c422a38ade4a","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "events\\v22.md": {"sourceHash":"32541e75a11836dc9b94b6d415cf00961cfdcc83d70772091e7efe9d0fe1ee70","targetHash":"130999233d4f48984ff5378bc75e4b38ac1f92f19f8de466ab1c562ecd860031","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "guide\\ngmodules\\overview.md": {"sourceHash":"6002fb263a38c4021a4c8022286127f55d2eedc9fbe73fcee6ba45e9134ba908","targetHash":"d8530b2bc424dffed8f6aea404da849c984fe56737fdc88990d782af373417ad","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "tools\\devtools\\component.md": {"sourceHash":"16135b06ecfd437787a88ce48cbefd4d5ceb54251d7222f22ce1b4d68e59364e","targetHash":"6aa970066eb340028456a8dee2918f2b36ce9d58d01973620df1a137acf0dbfd","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "tools\\devtools\\injectors.md": {"sourceHash":"b0dc7b392bf95d889fc0d8b3ac933b890f404638d44d892672f467fdb914158f","targetHash":"23e711e9d94947ceb9156125c77bbb7579a095101f71ed774915f6463b16f7a2","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "tools\\devtools\\overview.md": {"sourceHash":"51f2d0190fda3afef7348cab24542c072d3db9988f837dce48ba75a822885427","targetHash":"b42c738add1def9293a3647e9c582aef958176801a6869bf7dd79d32e81f9d72","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "tools\\devtools\\profiler.md": {"sourceHash":"6c1c3617c8cb35c09da6b8f2b86370dc60208fa1ef0d0419f2f9a9537d763ab0","targetHash":"c74a33ab930afff1ef0bf2a46294120090914099bf39d732405ee2fe2f751cdf","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "tools\\devtools\\router.md": {"sourceHash":"88c648d6db02527ac7d41efd62c2b256b9577c3f3cf841b20905dc8ff6c35052","targetHash":"4025f57a2826b5b3cb104ca98e2f7488ded33448841f1b76afd1070662ddbf13","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "tools\\language-service.md": {"sourceHash":"3b48fb5e3da6776381a6a4317b6553c3ce1b0db82e6496430cc3b1f6e589ae9e","targetHash":"e249811f6f69d074c4d2d92410052161a61b2cefbf0de5683ce22ddfbd98de65","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
+    "tools\\libraries\\overview.md": {"sourceHash":"87d0127ea6877d87c22d2bf0eb8a69b16d9d0d2cd57157dc73178623ed06b982","targetHash":"0d14fbc149f7c20372bcbdfec0ae9e27164a53eb7d81e2497447f61e3d411efe","translatedAt":"2026-07-22T13:20:00.000Z","model":"codex-manual"},
     "ai\\agent-skills.md": {
       "sourceHash": "acfe5984713a7b53dff8a6effed337942e27b82fe8f3c6ee90152b111abb9b68",
       "targetHash": "25dc8ba7e4e253991f4464aef253fb03d4f4f0d9184c6a79fbca6ecddd2ba55a",
@@ -41,6 +59,12 @@
       "sourceHash": "5a2f6a490b76fc2fecb6aec9d82542b628083e14e53c54047ece1e1da6ab7678",
       "targetHash": "40240e8b76131b7038b41b547615f9d9224b86afdb42452503dbdc0222ecfb93",
       "translatedAt": "2026-07-20T16:28:22.938Z",
+      "model": "codex-manual"
+    },
+    "best-practices\\a11y.md": {
+      "sourceHash": "9917db05f4f944a0060d7fe7266435790c4960349fa40a094b5e28ff96ecd676",
+      "targetHash": "983d395b3badfc0e02d15aaad457a44f705ba61b9f730acf480b78bffb6722d4",
+      "translatedAt": "2026-07-22T12:47:00.812Z",
       "model": "codex-manual"
     },
     "ecosystem\\rxjs-interop\\output-interop.md": {
@@ -1171,6 +1195,24 @@
       "translatedAt": "2026-07-19T08:39:50.302Z",
       "model": "codex-manual"
     },
+    "tools/devtools/component.md": {
+      "sourceHash": "16135b06ecfd437787a88ce48cbefd4d5ceb54251d7222f22ce1b4d68e59364e",
+      "targetHash": "6aa970066eb340028456a8dee2918f2b36ce9d58d01973620df1a137acf0dbfd",
+      "translatedAt": "2026-07-22T13:17:37.306Z",
+      "model": "codex-manual"
+    },
+    "tools/devtools/overview.md": {
+      "sourceHash": "51f2d0190fda3afef7348cab24542c072d3db9988f837dce48ba75a822885427",
+      "targetHash": "b42c738add1def9293a3647e9c582aef958176801a6869bf7dd79d32e81f9d72",
+      "translatedAt": "2026-07-22T13:17:37.306Z",
+      "model": "codex-manual"
+    },
+    "tools/libraries/overview.md": {
+      "sourceHash": "87d0127ea6877d87c22d2bf0eb8a69b16d9d0d2cd57157dc73178623ed06b982",
+      "targetHash": "0d14fbc149f7c20372bcbdfec0ae9e27164a53eb7d81e2497447f61e3d411efe",
+      "translatedAt": "2026-07-22T13:17:37.305Z",
+      "model": "codex-manual"
+    },
     "tools\\cli\\build-system-migration.md": {
       "sourceHash": "ad0c4ba052439ac4a670e3a0e4f63e980fa313dccbea7a8f1dcb3d1bed43c81d",
       "targetHash": "4649d5d97354216d0efec1315f2f629c4ff24074a27cbbf84ac93927dd8534a6",
@@ -1211,6 +1253,12 @@
       "sourceHash": "f59ccc1a5f2f82ca0d334f03bcd05235a7392cdcdf87a5a41afa476225d2c696",
       "targetHash": "1eaa163a1e5c4b2bcf77426872a017640b9b350253f210a46e1cdf5fd27149a6",
       "translatedAt": "2026-07-20T16:30:07.093Z",
+      "model": "codex-manual"
+    },
+    "tools\\cli\\schematics-authoring.md": {
+      "sourceHash": "14c2124cdbf8e070d27fe75a15bf03b3c5aa098e24960316e08eac09036801ea",
+      "targetHash": "ffca36e9284621ca38079b0571d509b2c89298618ada0c84d9c8ecec663ccbd4",
+      "translatedAt": "2026-07-22T13:02:56.500Z",
       "model": "codex-manual"
     },
     "tools\\cli\\schematics.md": {
