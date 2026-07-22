@@ -521,7 +521,6 @@ a {
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 15px;
-  font-weight: 650;
   margin: 0 auto;
   padding: 34px 48px 14px;
 }
@@ -550,9 +549,10 @@ a {
 }
 
 .doc-hero {
-  margin: 10px 0 36px;
-  border-bottom: 1px solid var(--line);
-  padding: 36px 0 30px;
+  /* margin: 10px 0 36px; */
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 32px;
 }
 
 .doc-hero p {
@@ -573,8 +573,8 @@ a {
 }
 
 .doc-hero div {
-  color: #4b5563;
-  font-size: 20px;
+  color: #2a2c2e;
+  font-size: 18px;
   line-height: 1.65;
   margin-top: 18px;
   max-width: 760px;
@@ -586,8 +586,8 @@ a {
 .doc-content h4,
 .doc-content h5,
 .doc-content h6 {
-  border-top: 1px solid var(--line);
-  color: #202026;
+  border-top: 1px dashed var(--line);
+  color: #060606;
   font-weight: 500;
   letter-spacing: 0;
   margin: 46px 0 18px;
@@ -596,6 +596,10 @@ a {
 
 .doc-content h1 {
   font-size: 28px;
+  border-top: 0;
+  margin: 0;
+  padding-top: 0;
+  color: var(--accent)
 }
 
 .doc-content h2 {
@@ -627,6 +631,7 @@ a {
 
 .doc-content p {
   margin: 16px 0;
+  overflow-x: auto;
 }
 
 .doc-content ul,
@@ -850,6 +855,10 @@ a {
   scrollbar-width: thin;
 }
 
+.doc-code-compact pre {
+  max-height: 400px;
+}
+
 .doc-code pre code {
   border: 0;
   background: transparent;
@@ -981,6 +990,11 @@ a {
   display: block;
 }
 
+.docs-app.rtl .doc-content-tabs .doc-code-tab-panel {
+  direction: rtl;
+  text-align: right;
+}
+
 .doc-code-tab-panel .doc-code {
   border: 0;
   border-radius: 0;
@@ -1068,6 +1082,21 @@ a {
 
 .token.operator {
   color: #cf222e;
+}
+
+.token.heading,
+.token.inline-code,
+.token.link {
+  color: #0550ae;
+}
+
+.token.list-marker {
+  color: #953800;
+}
+
+.token.bold {
+  color: #24292f;
+  font-weight: 700;
 }
 
 .token.flag,
@@ -1706,7 +1735,6 @@ a {
   background: var(--panel);
 }
 
-:root[data-theme="dark"] .doc-hero h1,
 :root[data-theme="dark"] .doc-content h1,
 :root[data-theme="dark"] .doc-content h2,
 :root[data-theme="dark"] .doc-content h3,
@@ -1719,6 +1747,11 @@ a {
 :root[data-theme="dark"] .toc-link.active {
   color: #fff;
 }
+
+:root[data-theme="dark"] .doc-hero h1{
+  color:var(--accent)
+}
+
 
 :root[data-theme="dark"] .doc-hero div,
 :root[data-theme="dark"] .doc-content p,
@@ -1836,6 +1869,20 @@ a {
 :root[data-theme="dark"] .token.property,
 :root[data-theme="dark"] .token.variable {
   color: #ffa657;
+}
+
+:root[data-theme="dark"] .token.heading,
+:root[data-theme="dark"] .token.inline-code,
+:root[data-theme="dark"] .token.link {
+  color: #79c0ff;
+}
+
+:root[data-theme="dark"] .token.list-marker {
+  color: #ffa657;
+}
+
+:root[data-theme="dark"] .token.bold {
+  color: #d7dae0;
 }
 
 :root[data-theme="dark"] .token.flag,

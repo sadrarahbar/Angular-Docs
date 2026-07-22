@@ -51,6 +51,7 @@ const getCodeVariant = (source: string) => {
 };
 
 const contentDirectory = path.join(process.cwd(), 'app', 'content');
+const publicDirectory = path.join(process.cwd(), 'public');
 const defaultContentLanguage: ContentLanguage = 'en';
 
 const normalizeCodeBody = (value: string) => {
@@ -128,13 +129,21 @@ const getCodeFromPath = (sourcePath: string, language: ContentLanguage) => {
     .replaceAll('/', path.sep);
   const preferredPath = getContentFilePath(language, relativePath);
   const fallbackPath = getContentFilePath(defaultContentLanguage, relativePath);
-  const filePath = fs.existsSync(preferredPath) ? preferredPath : fallbackPath;
+  const publicPath = path.join(publicDirectory, sourcePath.replace(/^\/?public\//, '').replace(/^\//, ''));
+  const mirroredAssetPath = path.join(publicDirectory, 'assets', 'context', path.basename(sourcePath));
+  const candidates = [preferredPath, fallbackPath, publicPath, mirroredAssetPath];
 
-  if (!filePath.startsWith(contentDirectory) || !fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
-    return '';
-  }
+  const isWithinAllowedRoot = (filePath: string) =>
+    [contentDirectory, publicDirectory].some((root) => {
+      const relative = path.relative(root, filePath);
+      return relative !== '' && !relative.startsWith('..') && !path.isAbsolute(relative);
+    });
 
-  return fs.readFileSync(filePath, 'utf8');
+  const filePath = candidates.find(
+    (candidate) => isWithinAllowedRoot(candidate) && fs.existsSync(candidate) && fs.statSync(candidate).isFile(),
+  );
+
+  return filePath ? fs.readFileSync(filePath, 'utf8') : '';
 };
 
 type TokenPattern = {
@@ -230,6 +239,16 @@ const highlightShell = (code: string) =>
     { regex: /<[^>\n]+>/gy, className: 'variable' },
   ]);
 
+const highlightMarkdown = (code: string) =>
+  tokenize(code, [
+    { regex: /<!--[\s\S]*?-->/gy, className: 'comment' },
+    { regex: /^#{1,6}(?=\s)/gmy, className: 'heading' },
+    { regex: /^[\t ]*(?:[-*+] |\d+\. )/gmy, className: 'list-marker' },
+    { regex: /`[^`\n]+`/gy, className: 'inline-code' },
+    { regex: /\[[^\]\n]+\]\([^)\n]+\)/gy, className: 'link' },
+    { regex: /\*\*[^*\n]+\*\*/gy, className: 'bold' },
+  ]);
+
 const highlightCode = (code: string, language: string) => {
   const normalizedLanguage = normalizeLanguage(language);
   let highlighted = '';
@@ -242,6 +261,8 @@ const highlightCode = (code: string, language: string) => {
     highlighted = highlightJson(code);
   } else if (normalizedLanguage === 'css') {
     highlighted = highlightStylesheet(code);
+  } else if (['md', 'markdown'].includes(normalizedLanguage)) {
+    highlighted = highlightMarkdown(code);
   } else if (normalizedLanguage === 'shell') {
     highlighted = highlightShell(code);
   } else {
@@ -251,17 +272,21 @@ const highlightCode = (code: string, language: string) => {
   return highlighted.replace(/\n/g, '&#10;');
 };
 
-const renderCodeBlock = (code: string, language = '', header = '', variant = '') => {
+const renderCodeBlock = (code: string, language = '', header = '', variant = '', compact = false) => {
   const normalizedCode = normalizeCodeBody(code);
   const normalizedLanguage = normalizeLanguage(language);
   const normalizedVariant = variant === 'prefer' || variant === 'avoid' ? variant : '';
   const label = normalizedVariant ? normalizedVariant.toUpperCase() : header || normalizedLanguage;
-  const classes = ['doc-code', normalizedVariant ? `doc-code-${normalizedVariant}` : ''].filter(Boolean).join(' ');
+  const classes = ['doc-code', normalizedVariant ? `doc-code-${normalizedVariant}` : '', compact ? 'doc-code-compact' : '']
+    .filter(Boolean)
+    .join(' ');
 
   return `<figure class="${classes}" data-language="${escapeHtml(normalizedLanguage)}"${
     normalizedVariant ? ` data-code-variant="${normalizedVariant}"` : ''
   }>${
-    label
+    compact
+      ? ''
+      : label
       ? `<figcaption><span class="doc-code-heading"><span class="doc-code-label">${escapeHtml(label)}</span>${
           normalizedVariant && header ? `<span class="doc-code-title">${escapeHtml(header)}</span>` : ''
         }</span><button type="button" class="doc-code-copy">Copy</button></figcaption>`
@@ -276,7 +301,9 @@ const renderDocsCode = (attrs: string, body: string, language: ContentLanguage) 
   const code = normalizeCodeBody(body) || getCodeFromPath(getAttr(attrs, 'path'), language);
   const header = getAttr(attrs, 'header');
 
-  return renderCodeBlock(code, inferLanguage(attrs), header, getCodeVariant(attrs));
+  const compact = /\bclass\s*=\s*(['"])[^'"]*\bcompact\b[^'"]*\1/i.test(attrs);
+
+  return renderCodeBlock(code, inferLanguage(attrs), header, getCodeVariant(attrs), compact);
 };
 
 const getFileKind = (header: string, language: string) => {
@@ -447,17 +474,52 @@ const renderDocsCodeTabs = (attrs: string, body: string, language: ContentLangua
     .join('')}</div></div></section>`;
 };
 
-const renderInline = (value: string) => {
-  let output = escapeHtml(value);
+const renderInline = (value: string): string => {
+  const anchors: { attrs: string; body: string }[] = [];
+  const markdownLinks: { label: string; href: string }[] = [];
+  let source = value.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (_match, attrs: string, body: string) => {
+    const index = anchors.push({ attrs, body }) - 1;
+    return `@@DOCSANCHOR${index}@@`;
+  });
+
+  source = source.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label: string, href: string) => {
+    const index = markdownLinks.push({ label, href }) - 1;
+    return `@@DOCSLINK${index}@@`;
+  });
+
+  let output = escapeHtml(source);
 
   // Preserve explicit Markdown line breaks without allowing arbitrary inline HTML.
   output = output.replace(/&lt;br\s*\/?&gt;/gi, '<br>');
   output = output.replace(/`([^`]+)`/g, '<code>$1</code>');
   output = output.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   output = output.replace(/_([^_]+)_/g, '<em>$1</em>');
-  output = output.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label: string, href: string) => {
-    const normalizedHref = href.startsWith('http') || href.startsWith('/') ? href : `/${href}`;
-    return `<a href="${escapeHtml(normalizedHref)}">${label}</a>`;
+  output = output.replace(/@@DOCSLINK(\d+)@@/g, (_match, rawIndex: string) => {
+    const link = markdownLinks[Number(rawIndex)];
+
+    if (!link) {
+      return '';
+    }
+
+    const normalizedHref = /^(?:https?:|mailto:|\/|#)/i.test(link.href) ? link.href : `/${link.href}`;
+    return `<a href="${escapeAttribute(normalizedHref)}">${renderInline(link.label)}</a>`;
+  });
+
+  output = output.replace(/@@DOCSANCHOR(\d+)@@/g, (_match, rawIndex: string) => {
+    const anchor = anchors[Number(rawIndex)];
+
+    if (!anchor) {
+      return '';
+    }
+
+    const rawHref = getAttr(anchor.attrs, 'href');
+    const href = /^(?:https?:|mailto:|\/|#)/i.test(rawHref) ? rawHref : '#';
+    const target = getAttr(anchor.attrs, 'target') === '_blank' ? ' target="_blank" rel="noopener noreferrer"' : '';
+    const hasDownload = /(?:^|\s)download(?:\s*=|\s|$)/i.test(anchor.attrs);
+    const downloadName = getAttr(anchor.attrs, 'download');
+    const download = hasDownload ? ` download${downloadName ? `="${escapeAttribute(downloadName)}"` : ''}` : '';
+
+    return `<a href="${escapeAttribute(href)}"${target}${download}>${renderInline(anchor.body)}</a>`;
   });
 
   return output;
@@ -533,6 +595,32 @@ const renderMarkdownTable = (header: string[], rows: string[][]) => {
 
 const renderCustomBlocks = (source: string, language: ContentLanguage) => {
   let output = source;
+
+  output = output.replace(
+    /<docs-tab-group[^>]*>([\s\S]*?)<\/docs-tab-group>/g,
+    (_match, body: string) => {
+      const tabs = [...body.matchAll(/<docs-tab([^>]*)>([\s\S]*?)<\/docs-tab>/g)].map((tab) => ({
+        label: getAttr(tab[1], 'label') || 'Tab',
+        html: renderMarkdown(normalizeCodeBody(tab[2]), language).html,
+      }));
+
+      if (!tabs.length) {
+        return '';
+      }
+
+      return `<section class="doc-code-tabs doc-content-tabs"><div class="doc-code-tabs-code"><div class="doc-code-tab-navigation"><button type="button" class="doc-code-tab-arrow previous" data-code-tab-nav="previous" aria-label="Previous tab"><span aria-hidden="true">‹</span></button><div class="doc-code-tab-list" role="tablist">${tabs
+        .map(
+          (tab, index) =>
+            `<button type="button" class="doc-code-tab${index === 0 ? ' active' : ''}" data-code-tab="${index}" role="tab" aria-selected="${index === 0}">${renderInline(tab.label)}</button>`,
+        )
+        .join('')}</div><button type="button" class="doc-code-tab-arrow next" data-code-tab-nav="next" aria-label="Next tab"><span aria-hidden="true">›</span></button></div><div class="doc-code-tab-panels">${tabs
+        .map(
+          (tab, index) =>
+            `<div class="doc-code-tab-panel${index === 0 ? ' active' : ''}" data-code-panel="${index}" role="tabpanel">${tab.html}</div>`,
+        )
+        .join('')}</div></div></section>`;
+    },
+  );
 
   output = output.replace(/<docs-callout([^>]*)>/g, (_match, attrs: string) => {
     const title = getAttr(attrs, 'title') || getAttr(attrs, 'header');
