@@ -30,10 +30,10 @@ const getLocalizedContentPath = (language: Language, contentPath: string) =>
   path.join(contentDirectory, language, `${contentPath}.md`);
 
 export const navigationSections = [
-  { label: 'Docs', items: DOCS_SUB_NAVIGATION_DATA },
-  { label: 'Tutorials', items: TUTORIALS_SUB_NAVIGATION_DATA },
-  { label: 'Reference', items: REFERENCE_SUB_NAVIGATION_DATA },
-  { label: 'More', items: FOOTER_NAVIGATION_DATA },
+  { label: 'Docs', items: DOCS_SUB_NAVIGATION_DATA, status: 'active' },
+  { label: 'Tutorials', items: TUTORIALS_SUB_NAVIGATION_DATA, status: 'disabled' },
+  { label: 'Reference', items: REFERENCE_SUB_NAVIGATION_DATA, status: 'disabled' },
+  { label: 'More', items: FOOTER_NAVIGATION_DATA, status: 'disabled' },
 ];
 
 const isExternal = (value?: string) => Boolean(value?.startsWith('http'));
@@ -56,9 +56,9 @@ const walkNavigation = (items: NavigationItem[], section: string, depth = 0): Do
     return [...self, ...children];
   });
 
-export const allDocs = navigationSections.flatMap((section) =>
-  walkNavigation(section.items, section.label),
-);
+export const allDocs = navigationSections
+  .filter((section) => section.status === 'active')
+  .flatMap((section) => walkNavigation(section.items, section.label));
 
 export const docsWithContent = allDocs.filter((item) => item.contentPath);
 

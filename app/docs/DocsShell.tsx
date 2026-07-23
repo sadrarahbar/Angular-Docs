@@ -73,13 +73,14 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
   const useFallbackHero = !canonicalRendered?.html.includes('<h1');
   const previousDoc = localizeDocEntry(neighbors.previous, language);
   const nextDoc = localizeDocEntry(neighbors.next, language);
-  const primaryNavigation = navigationSections.slice(0, 3).map((section) => ({
+  const primaryNavigation = navigationSections.map((section) => ({
     label: translateLabel(section.label, language),
     href: getLocalizedHref(
       allDocs.find((item) => item.section === section.label && item.contentPath)?.href ?? '/overview',
       language,
     ),
     isActive: section.label === doc.section,
+    disabled: section.status === 'disabled',
   }));
   const isRtl = isRtlLanguage(language);
 
@@ -104,16 +105,26 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
         </div>
           <nav className="hidden items-center gap-2.5 min-[821px]:flex" aria-label="Primary navigation">
             {primaryNavigation.map((section) => (
-              <Link
-                key={section.label}
-                href={section.href}
-                className={[
-                  'px-2.5 py-5 text-sm font-semibold hover:!text-[var(--accent)]',
-                  section.isActive ? 'border-b-[3px] border-b-[var(--accent)] !text-[var(--accent)]' : '!text-gray-500 ',
-                ].join(' ')}
-              >
-                {section.label}
-              </Link>
+              section.disabled ? (
+                <span
+                  key={section.label}
+                  aria-disabled="true"
+                  className="cursor-not-allowed px-2.5 py-5 text-sm font-semibold !text-gray-400 opacity-50"
+                >
+                  {section.label}
+                </span>
+              ) : (
+                <Link
+                  key={section.label}
+                  href={section.href}
+                  className={[
+                    'px-2.5 py-5 text-sm font-semibold hover:!text-[var(--accent)]',
+                    section.isActive ? 'border-b-[3px] border-b-[var(--accent)] !text-[var(--accent)]' : '!text-gray-500 ',
+                  ].join(' ')}
+                >
+                  {section.label}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -134,6 +145,7 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
         />
 
         <DocsContentArea
+          key={doc.href}
           breadcrumbItems={breadcrumbItems}
           docTitle={currentDoc.label}
           forceFallbackHero={useFallbackHero}

@@ -1,4 +1,8 @@
+'use client';
+
+import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import type { DocEntry, Language } from './data';
 import type { RenderedMarkdown } from './markdown';
 import { CodeInteractions } from './CodeInteractions';
@@ -31,6 +35,23 @@ const getLocalizedHref = (href: string, language: Language) => {
   return `${href}?lang=${language}`;
 };
 
+export function DocsContentLoading() {
+  return (
+    <div className="docs-content-loading" role="status" aria-label="Loading content">
+      <span className="docs-content-loading-ring" aria-hidden="true" />
+      <Image
+        className="docs-content-loading-logo"
+        src="/logo.svg"
+        width={80}
+        height={80}
+        alt=""
+        priority
+      />
+      <span className="sr-only">Loading content</span>
+    </div>
+  );
+}
+
 export function DocsContentArea({
   breadcrumbItems,
   docTitle,
@@ -40,11 +61,26 @@ export function DocsContentArea({
   nextDoc,
   language,
 }: DocsContentAreaProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const hasPageTitle = /<h1(?:\s|>)/i.test(rendered.html);
   const showFallbackHero = forceFallbackHero || !hasPageTitle;
   const contentHtml = forceFallbackHero
     ? rendered.html.replace(/^\s*<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, '')
     : rendered.html;
+
+  useEffect(() => {
+    const loadingTimer = window.setTimeout(() => setIsLoading(false), 450);
+
+    return () => window.clearTimeout(loadingTimer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="docs-content-layout docs-content-layout-loading">
+        <DocsContentLoading />
+      </div>
+    );
+  }
 
   return (
     <div className="docs-content-layout">

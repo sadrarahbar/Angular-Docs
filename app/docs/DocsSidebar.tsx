@@ -11,6 +11,7 @@ type PrimaryNavigationItem = {
   label: string;
   href: string;
   isActive: boolean;
+  disabled: boolean;
 };
 
 type DocsSidebarProps = {
@@ -48,18 +49,28 @@ export function DocsSidebar({ section, items, activeHref, language, primaryNavig
             ].join(' ')}
           >
             {primaryNavigation.map((section) => (
-              <Link
-                key={section.label}
-                href={section.href}
-                className={[
-                  'px-2.5 py-3 text-sm font-semibold hover:!text-[var(--accent)]',
-                  section.isActive
-                    ? 'border-b-[3px] border-b-[var(--accent)] !text-[var(--accent)]'
-                    : '!text-[var(--muted)]',
-                ].join(' ')}
-              >
-                {section.label}
-              </Link>
+              section.disabled ? (
+                <span
+                  key={section.label}
+                  aria-disabled="true"
+                  className="cursor-not-allowed px-2.5 py-3 text-sm font-semibold !text-[var(--muted)] opacity-50"
+                >
+                  {section.label}
+                </span>
+              ) : (
+                <Link
+                  key={section.label}
+                  href={section.href}
+                  className={[
+                    'px-2.5 py-3 text-sm font-semibold hover:!text-[var(--accent)]',
+                    section.isActive
+                      ? 'border-b-[3px] border-b-[var(--accent)] !text-[var(--accent)]'
+                      : '!text-[var(--muted)]',
+                  ].join(' ')}
+                >
+                  {section.label}
+                </Link>
+              )
             ))}
           </nav>
       </div>
