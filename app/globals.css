@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 :root {
+  --font-inter-tight: "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-geist-sans: "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-geist-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   --background: #fbfbfd;
   --foreground: #1f1f23;
   --muted: #686871;
@@ -2099,6 +2102,154 @@ a {
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
       url("/fonts/iransans/ttf/IRANSansWeb_Bold.ttf") format("truetype");
   font-display: swap;
+}
+
+.pwa-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.connection-status {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 11px;
+  white-space: nowrap;
+}
+
+.connection-status-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #9ca3af;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #9ca3af 16%, transparent);
+}
+
+.connection-status.online .connection-status-dot {
+  background: #22c55e;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 18%, transparent);
+}
+
+.connection-status.offline .connection-status-dot {
+  background: #f97316;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #f97316 18%, transparent);
+}
+
+.pwa-action {
+  position: relative;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease;
+}
+
+.pwa-action:hover:not(:disabled) {
+  background: var(--panel);
+  color: var(--foreground);
+}
+
+.pwa-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.pwa-action.attention {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pwa-action.attention::after {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--topbar-bg);
+  border-radius: 50%;
+  background: var(--accent);
+  content: "";
+}
+
+.pwa-action svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pwa-download-progress {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.offline-fallback {
+  display: flex;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--background);
+  color: var(--foreground);
+  padding: 32px;
+  text-align: center;
+}
+
+.offline-fallback h1,
+.offline-fallback p {
+  margin: 0;
+}
+
+.offline-fallback p {
+  max-width: 520px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.offline-fallback a {
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 11px 18px;
+}
+
+@media (max-width: 680px) {
+  .connection-status {
+    width: 36px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .connection-status > span:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
 }
 
 @font-face {

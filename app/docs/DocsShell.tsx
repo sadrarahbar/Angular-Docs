@@ -7,6 +7,7 @@ import { DocsContentArea } from './DocsContentArea';
 import { DocsSidebar } from './DocsSidebar';
 import { LanguageSelect } from './LanguageSelect';
 import { ThemeToggle } from './ThemeToggle';
+import { PwaControls } from '../pwa/PwaControls';
 import { localizeDocEntry, localizeNavigationItems, translateLabel } from './i18n';
 
 type DocsShellProps = {
@@ -131,6 +132,7 @@ export function DocsShell({ doc, rendered, language }: DocsShellProps) {
         {/* left */}
         <div className="flex items-center gap-2 md:gap-4">
           <ThemeToggle />
+          <PwaControls language={language} />
           <LanguageSelect language={language} />
         </div>
       </header>

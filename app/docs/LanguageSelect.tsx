@@ -24,7 +24,17 @@ export function LanguageSelect({ language }: LanguageSelectProps) {
     }
 
     const query = params.toString();
-    router.push(query ? `${pathname}?${query}` : pathname);
+    const nextUrl = query ? `${pathname}?${query}` : pathname;
+
+    if (
+      !window.navigator.onLine ||
+      document.documentElement.dataset.connection === 'offline'
+    ) {
+      window.location.assign(nextUrl);
+      return;
+    }
+
+    router.push(nextUrl);
   };
 
   const nextLanguage = language === 'fa' ? 'en' : 'fa';

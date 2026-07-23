@@ -7,26 +7,39 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "pwa:icons": "tsx scripts/generate-pwa-icons.ts",
+    "pwa:notify": "tsx scripts/notify-content-update.ts",
+    "pwa:test-cache": "node scripts/test-pwa-cache.mjs",
+    "pwa:vapid": "web-push generate-vapid-keys",
     "docs:translate": "tsx scripts/translate-docs.ts",
     "docs:translate:optional": "tsx scripts/translate-docs.ts --skip-on-quota",
     "docs:translate:gemini": "tsx scripts/translate-docs.ts --provider=gemini",
     "build2": "npm run docs:translate:optional && next build"
   },
   "dependencies": {
-    "next": "16.2.10",
+    "next": "^16.2.11",
     "openai": "^6.48.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/web-push": "^3.6.4",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "tsx": "^4.23.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "sharp": "$sharp",
+    "next": {
+      "postcss": "8.5.10"
+    }
   }
 }
